@@ -10,7 +10,7 @@ const Header = () => {
         <div className={`w-full `}>
             {open && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-0"
+                    className="fixed inset-0 bg-black/50 z-50"
                     onClick={() => setOpen(false)}
                 />
             )}
@@ -43,7 +43,7 @@ const Header = () => {
 
                 </div>
             </div>
-            <div className={`md:hidden absolute ${open ? "left-0" : "-left-100"} duration-500 transition-all z-20 top-0 w-4/5 shadow-xl h-screen bg-white`}>
+            <div className={`md:hidden fixed ${open ? "left-0" : "-left-100"} duration-500 transition-all z-60 top-0 w-4/5 shadow-xl h-screen bg-white`}>
                 <div className="h-16 bg-[#F6F6F6] flex justify-between items-center px-5">
                     <h1 className="uppercase text-2xl">Nithin & CO</h1>
                     <X onClick={() => setOpen(prev => !prev)} />
