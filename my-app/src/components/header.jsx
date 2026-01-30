@@ -61,7 +61,7 @@ const Header = () => {
                 </div>
             </div>
             {/* BOTTOM NAV */}
-            <div className="md:hidden fixed bottom-0 h-18 w-full bg-white border-t flex items-center justify-between px-5">
+            <div className="md:hidden fixed z-30 bottom-0 h-18 w-full bg-white border-t flex items-center justify-between px-5">
                 <div className="flex flex-col items-center gap-1 list-none">
                     <Home size={20}/>
                     <li className="text-[13px]">Home</li>
