@@ -3,6 +3,7 @@
 import { Heart, Home, Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { Input } from "./ui/input";
 import { useState } from "react";
+import Link from "next/link";
 
 const Header = () => {
     const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ const Header = () => {
                     <Input type={"text"} placeholder={"Search Products"} className={"w-[270px]"} />
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-[#B3B3B3]" />
                 </div>
-                <Menu onClick={() => setOpen(prev => !prev)} />
+                <Menu className="md:hidden" onClick={() => setOpen(prev => !prev)} />
                 <h1 className="md:absolute md:left-1/2 md:-translate-x-1/2 text-[20px] uppercase text-[#222222]">Nithin & CO</h1>
                 <div className="flex items-center gap-3">
                     <User className="max-md:hidden" />
@@ -63,19 +64,17 @@ const Header = () => {
             {/* BOTTOM NAV */}
             <div className="md:hidden fixed z-30 bottom-0 h-18 w-full bg-white border-t flex items-center justify-between px-5">
                 <div className="flex flex-col items-center gap-1 list-none">
-                    <Home size={20}/>
+                    <Home size={20} />
                     <li className="text-[13px]">Home</li>
                 </div>
+
+                <Link href="/" className="flex flex-col items-center gap-1 list-none"><Search size={20} />
+                    <li className="text-[13px]">Search</li></Link>
+                <Link href={"/wishlist"} className="flex flex-col items-center gap-1 list-none">
+                    <Heart size={20} />
+                    <li className="text-[13px]">Wishlist</li></Link>
                 <div className="flex flex-col items-center gap-1 list-none">
-                    <Search size={20}/>
-                    <li className="text-[13px]">Search</li>
-                </div>
-                <div className="flex flex-col items-center gap-1 list-none">
-                    <Heart size={20}/>
-                    <li className="text-[13px]">Wishlist</li>
-                </div>
-                <div className="flex flex-col items-center gap-1 list-none">
-                    <User size={20}/>
+                    <User size={20} />
                     <li className="text-[13px]">Account</li>
                 </div>
             </div>
