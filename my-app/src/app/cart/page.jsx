@@ -63,7 +63,7 @@ export default function Cart() {
                         className={`
     overflow-hidden transition-all duration-800 ease-in-out
     ${addOpen
-                                ? "max-h-[600px] opacity-100 translate-y-0"
+                                ? "max-h-150 opacity-100 translate-y-0"
                                 : "max-h-0 opacity-0 -translate-y-2"}
     text-sm space-y-3
   `}
