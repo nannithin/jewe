@@ -2,10 +2,25 @@
 
 import { Heart, Home, Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { Input } from "./ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const Header = () => {
+    const [openSearch, setOpenSearch] = useState(false);
+
+    // lock background scroll
+    useEffect(() => {
+        document.body.style.overflow = openSearch ? "hidden" : "auto";
+    }, [openSearch]);
+    const [cate, setCate] = useState([
+        "New products",
+        "Special offers",
+        "Necklaces",
+        "Rings",
+        "Bracelets",
+        "Earnings",
+        "watches"
+    ])
     const [open, setOpen] = useState(false);
     return (
         <div className={`w-full `}>
@@ -50,26 +65,25 @@ const Header = () => {
                     <X onClick={() => setOpen(prev => !prev)} />
                 </div>
                 <div className="px-4 border-b flex items-center gap-5 text-[15px] font-medium">
-                    <p>MENU</p>
                     <p className="text-muted-foreground border-b-2 border-black py-4 ">CATEGORIES</p>
                 </div>
                 <div className="px-5 list-none py-3">
                     {
-                        [1, 2, 3, 4, 5, 6].map((item, ind) => (
-                            <li className="py-2" key={ind}>Home</li>
+                        cate.map((item, ind) => (
+                            <li className="py-2" key={ind}>{item}</li>
                         ))
                     }
                 </div>
             </div>
             {/* BOTTOM NAV */}
             <div className="md:hidden fixed z-30 bottom-0 h-18 w-full bg-white border-t flex items-center justify-between px-5">
-                <div className="flex flex-col items-center gap-1 list-none">
+                <Link href={"/"} className="flex flex-col items-center gap-1 list-none">
                     <Home size={20} />
                     <li className="text-[13px]">Home</li>
-                </div>
+                </Link>
 
-                <Link href="/" className="flex flex-col items-center gap-1 list-none"><Search size={20} />
-                    <li className="text-[13px]">Search</li></Link>
+                <div onClick={() => setOpenSearch(true)} className="flex flex-col items-center gap-1 list-none"><Search size={20} />
+                    <li className="text-[13px]">Search</li></div>
                 <Link href={"/wishlist"} className="flex flex-col items-center gap-1 list-none">
                     <Heart size={20} />
                     <li className="text-[13px]">Wishlist</li></Link>
@@ -77,6 +91,23 @@ const Header = () => {
                     <User size={20} />
                     <li className="text-[13px]">Account</li>
                 </Link>
+            </div>
+            <div
+                className={`fixed  px-5 py-8 space-y-5 inset-0 z-20 bg-white
+        transform transition-transform duration-500 ease-in-out
+        ${openSearch ? "translate-y-0" : "-translate-y-full"}`}
+            >
+                <X
+                    className="cursor-pointer float-right"
+                    onClick={() => setOpenSearch(false)}
+                />
+                <Input
+                    autoFocus
+                    placeholder="Search products..."
+                    className="flex-1"
+                />
+
+                
             </div>
         </div>
     )
