@@ -73,10 +73,10 @@ const Header = () => {
                 <Link href={"/wishlist"} className="flex flex-col items-center gap-1 list-none">
                     <Heart size={20} />
                     <li className="text-[13px]">Wishlist</li></Link>
-                <div className="flex flex-col items-center gap-1 list-none">
+                <Link href={"/profile"} className="flex flex-col items-center gap-1 list-none">
                     <User size={20} />
                     <li className="text-[13px]">Account</li>
-                </div>
+                </Link>
             </div>
         </div>
     )

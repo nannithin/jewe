@@ -13,7 +13,7 @@ export default function(){
                 <div className="grid gap-1">
                     <label className="" htmlFor="password">Password <span className="text-orange-600"> *</span></label>
                     <Input type={"email"} />
-                    <p className="text-right">Forgot password?</p>
+                    <p className="text-right text-sm">Forgot password?</p>
                 </div>
 
                 <Button className={"w-full h-11 my-1 bg-[#B5947C] border-none text-white"}>Login</Button>
