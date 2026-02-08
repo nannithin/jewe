@@ -4,10 +4,12 @@ import { Heart, Home, Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
     const [openSearch, setOpenSearch] = useState(false);
-
+    const router = useRouter();
+    const [query,setQuery] = useState("")
     // lock background scroll
     useEffect(() => {
         document.body.style.overflow = openSearch ? "hidden" : "auto";
@@ -105,9 +107,18 @@ const Header = () => {
                     autoFocus
                     placeholder="Search products..."
                     className="flex-1"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" && query.trim()) {
+                            setOpenSearch(false);
+                            router.push(`/item?search=${query}`);
+                        }
+                    }}
                 />
 
-                
+
+
             </div>
         </div>
     )

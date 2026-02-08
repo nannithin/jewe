@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import api from "@/lib/axios";
 import ItemCard from "@/components/cardd";
 import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
@@ -7,6 +11,21 @@ import earning from "../../public/earnings.jpg"
 import bg from "../../public/download.jpg"
 
 export default function Home() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchLatestProducts = async () => {
+      try {
+        const res = await api.get("/products");
+        setProducts(res.data.slice(0, 10)); // latest 10
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchLatestProducts();
+  }, []);
+
   return (
     <div className="min-h-screen  space-y-8 pb-[100px]">
       <div className="relative w-full h-[270px] md:h-[600px]">
@@ -72,8 +91,8 @@ export default function Home() {
         </div>
         <ScrollArea className="w-full">
           <div className="w-max py-5 flex items-center gap-5 md:gap-8">
-            {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, ind) => (
-              <ItemCard key={ind} />
+            {products.map((product) => (
+              <ItemCard key={product._id} product={product} />
             ))}
           </div>
           <ScrollBar orientation="horizontal" />
