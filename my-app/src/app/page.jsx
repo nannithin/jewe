@@ -9,6 +9,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import earning from "../../public/earnings.jpg"
 import bg from "../../public/download.jpg"
+import bgimg from "../../public/download (1).jpg"
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -59,10 +60,13 @@ export default function Home() {
       </div>
       <div>
         <div className="grid md:grid-cols-3 px-5">
-          <div className="bg-[#F6F6F6] p-8 space-y-2">
-            <p className="text-sm">FLAT DISCOUNT</p>
-            <p className="text-xl max-w-1/2 ">Necklaces & Body Jewels</p>
-            <a className="uppercase border-b text-sm border-black" href="">Shop now</a>
+          <div className="relative">
+            <Image src={bgimg} alt="bg"/>
+            <div className="absolute top-0 left-0 p-8 space-y-2">
+              <p className="text-sm">FLAT DISCOUNT</p>
+              <p className="text-xl max-w-1/2 ">Necklaces & Body Jewels</p>
+              <a className="uppercase border-b text-sm border-black" href="">Shop now</a>
+            </div>
           </div>
         </div>
       </div>

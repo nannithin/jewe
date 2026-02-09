@@ -42,7 +42,7 @@ const Header = () => {
                 <div className="flex items-center gap-3">
                     <User className="max-md:hidden" />
                     <Heart className="max-md:hidden" />
-                    <ShoppingCart />
+                    <Link href={"/cart"}><ShoppingCart /></Link>
                 </div>
             </div>
             <div className="h-12 max-md:hidden flex items-center justify-between px-20 border-b border-[#E5E5E5] text-[13px]">
