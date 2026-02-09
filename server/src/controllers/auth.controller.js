@@ -30,9 +30,10 @@ export const register = async (req, res) => {
     );
 
     res.cookie("token", token, {
-      httpOnly: true,
+     httpOnly: true,
       secure: true,
-      
+      sameSite: "none",
+      domain: ".jewe-five.vercel.app", 
       path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
@@ -53,13 +54,53 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email });
-  if (!user) return res.status(400).json({ message: "Invalid credentials" });
+  try {
+    const { email, password } = req.body;
 
-  const match = await bcrypt.compare(password, user.password);
-  if (!match) return res.status(400).json({ message: "Invalid credentials" });
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-  res.json({ token, user });
+    if (!email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const user = await User.findOne({ email }).select('+password');
+    if (!user) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      domain: ".jewe-five.vercel.app", 
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    })
+
+
+
+    res.json({
+      message: "Login successful",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({ message: "Server error" });
+  }
 };
