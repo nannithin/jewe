@@ -16,7 +16,7 @@ export default function Item({ params }) {
   useState(() => {
     const fetchProduct = async () => {
       const res = await fetch(
-        `hhttps://jewe-2w4e.onrender.com/api/products/${slug}`
+        `https://jewe-2w4e.onrender.com/api/products/${slug}`
       );
       const data = await res.json();
       setProduct(data);
