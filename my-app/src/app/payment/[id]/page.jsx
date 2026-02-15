@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import api from "@/lib/axios";
 import { useParams } from 'next/navigation'
+import qr from '../../../../public/WhatsApp Image 2026-02-13 at 1.19.36 PM.jpeg'
+import Image from 'next/image'
 
 
 export default function PaymentForm() {
@@ -99,8 +101,8 @@ export default function PaymentForm() {
               </div>
 
               <div className="bg-white rounded-xl p-6 mb-6 shadow-sm">
-                <img
-                  src="/upi-qr.png"
+                <Image
+                  src={qr}
                   alt="UPI QR Code"
                   className="w-full aspect-square object-cover rounded-lg bg-secondary/50"
                 />
