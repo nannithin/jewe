@@ -24,7 +24,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <Header />
-        {children}
+
+        {/* Add padding equal to header height */}
+        <main className="pt-[112px] md:pt-[128px]">
+          {children}
+        </main>
       </body>
     </html>
   );
