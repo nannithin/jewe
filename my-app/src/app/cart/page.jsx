@@ -5,11 +5,14 @@ import { Input } from "@/components/ui/input";
 import { ChevronDown, ChevronRight, Minus, Plus, X } from "lucide-react";
 import { useState } from "react";
 import useStore from "@/store/useStore";
+import api from "@/lib/axios";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Cart() {
     const [addOpen, setAddOpen] = useState(false);
     const { cart, removeFromCart, increaseQty, decreaseQty } = useStore();
-
+    const router = useRouter();
     const subtotal = cart.reduce(
         (sum, item) => sum + item.price * item.qty,
         0
@@ -30,7 +33,7 @@ export default function Cart() {
                 )}
 
                 {cart.map((item) => (
-                    <div
+                    <Link href={`/item/${item.slug}`}
                         key={item._id}
                         className="py-5 border-b flex justify-between items-start gap-5"
                     >
@@ -73,7 +76,7 @@ export default function Cart() {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
 
@@ -140,7 +143,37 @@ export default function Cart() {
                     </div>
                 </div>
             </div>
-            <Button className={"h-11 bg-black text-white w-full"}>PROCEED TO CHECKOUT</Button>
+            <Button
+                className="h-11 bg-black text-white w-full"
+                onClick={async () => {
+                    if (cart.length === 0) {
+                        alert("Cart is empty");
+                        return;
+                    }
+
+                    try {
+                        const res = await api.post("/orders/create", JSON.stringify({
+                            items: cart,
+                            shippingAddress: {
+                                name: "Temp Name", // later connect inputs
+                            },
+                        }))
+
+                        if (res.status === 401) {
+                            router.push("/login");
+                            return;
+                        }
+                        console.log(res.data.order);
+
+                        router.push(`/payment/${res.data.order._id}`);
+                    } catch (err) {
+                        console.error(err);
+                    }
+                }}
+            >
+                PROCEED TO CHECKOUT
+            </Button>
+
         </div>
     )
 }

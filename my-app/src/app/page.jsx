@@ -26,6 +26,13 @@ export default function Home() {
 
     fetchLatestProducts();
   }, []);
+  const [cate, setCate] = useState([
+    "Necklaces",
+    "Rings",
+    "Bracelets",
+    "Earnings",
+    "watches"
+  ])
 
   return (
     <div className="min-h-screen  space-y-8 pb-[100px]">
@@ -61,7 +68,7 @@ export default function Home() {
       <div>
         <div className="grid md:grid-cols-3 px-5">
           <div className="relative">
-            <Image src={bgimg} alt="bg"/>
+            <Image src={bgimg} alt="bg" />
             <div className="absolute top-0 left-0 p-8 space-y-2">
               <p className="text-sm">FLAT DISCOUNT</p>
               <p className="text-xl max-w-1/2 ">Necklaces & Body Jewels</p>
@@ -75,12 +82,12 @@ export default function Home() {
 
         <ScrollArea className="w-full">
           <div className="w-max py-5 flex items-center gap-5 md:gap-8">
-            {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, ind) => (
+            {cate.map((item, ind) => (
               <div key={ind} className="flex flex-col items-center gap-4">
                 <div className="h-36 w-36 rounded-full bg-[#F6F6F6]">
                   <Image src={earning} alt="earrings" />
                 </div>
-                <p className="font-medium underline">NECKLACES</p>
+                <p className="font-medium">{item}</p>
               </div>
             ))}
           </div>
@@ -104,7 +111,9 @@ export default function Home() {
 
 
       </div>
-      <div className="bg-[#FEED9F] w-full h-11"></div>
+      <div className="bg-[#FEED9F] w-full h-11 flex items-center justify-center">
+        <p className="text-[#B5947C]">Jewellery is like the icing on the cake.</p>
+      </div>
       <div className="w-full bg-[#FCF9F1] ">
         <div className="md:grid grid-cols-2 md:px-10 md:py-20">
           <div className="bg-white">

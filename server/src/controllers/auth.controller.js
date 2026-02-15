@@ -30,7 +30,7 @@ export const register = async (req, res) => {
     );
 
     res.cookie("token", token, {
-     httpOnly: true,
+      httpOnly: true,
       secure: true,
       sameSite: "none",
       domain: ".jewe-five.vercel.app", 

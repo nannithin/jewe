@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight, X } from "lucide-react";
 import useStore from "@/store/useStore";
+import Link from "next/link";
+import { showToast } from "nextjs-toast-notify";
 
 export default function Wishlist() {
   const { wishlist, removeFromWishlist, addToCart } = useStore();
@@ -28,9 +30,10 @@ export default function Wishlist() {
 
       <div>
         {wishlist.map((item) => (
-          <div
+          <Link href={`/item/${item.slug}`}
             key={item._id}
             className="py-5 border-b flex gap-5"
+
           >
             <div className="w-24 h-24 aspect-square bg-accent rounded-md" />
 
@@ -51,12 +54,20 @@ export default function Wishlist() {
                 onClick={() => {
                   addToCart(item);
                   removeFromWishlist(item._id);
+                  showToast.success("Item added to cart", {
+                    duration: 4000,
+                    progress: true,
+                    position: "top-right",
+                    transition: "popUp",
+                    icon: '',
+                    sound: true,
+                  });
                 }}
               >
                 Add to cart
               </Button>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

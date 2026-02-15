@@ -5,18 +5,17 @@ import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import api from "@/lib/axios";
 
 const Header = () => {
     const [openSearch, setOpenSearch] = useState(false);
     const router = useRouter();
-    const [query,setQuery] = useState("")
+    const [query, setQuery] = useState("")
     // lock background scroll
     useEffect(() => {
         document.body.style.overflow = openSearch ? "hidden" : "auto";
     }, [openSearch]);
     const [cate, setCate] = useState([
-        "New products",
-        "Special offers",
         "Necklaces",
         "Rings",
         "Bracelets",
@@ -72,7 +71,10 @@ const Header = () => {
                 <div className="px-5 list-none py-3">
                     {
                         cate.map((item, ind) => (
-                            <li className="py-2" key={ind}>{item}</li>
+                            <li onClick={() => {
+                                setOpen(false)
+                                router.push(`/item?search=${item}`)
+                            }} className="py-2" key={ind}>{item}</li>
                         ))
                     }
                 </div>
@@ -89,10 +91,26 @@ const Header = () => {
                 <Link href={"/wishlist"} className="flex flex-col items-center gap-1 list-none">
                     <Heart size={20} />
                     <li className="text-[13px]">Wishlist</li></Link>
-                <Link href={"/profile"} className="flex flex-col items-center gap-1 list-none">
+                <div
+                    onClick={async () => {
+                        try {
+                            const res = await api.get("/products/dashboard");
+
+                            if (res.status === 200) {
+                                router.push("/profile");
+                            } else if (res.status === 401) {
+                                router.push("/auth/login");
+                            }
+                        } catch (error) {
+                            router.push("/auth/login");
+                        }
+                    }}
+                    className="flex flex-col items-center gap-1 list-none cursor-pointer"
+                >
                     <User size={20} />
                     <li className="text-[13px]">Account</li>
-                </Link>
+                </div>
+
             </div>
             <div
                 className={`fixed  px-5 py-8 space-y-5 inset-0 z-20 bg-white

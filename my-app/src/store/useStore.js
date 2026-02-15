@@ -22,26 +22,27 @@ const useStore = create((set) => ({
     })),
 
   // ---------- CART ----------
-  addToCart: (product) =>
-    set((state) => {
-      const existing = state.cart.find(
-        (item) => String(item._id) === String(product._id)
-      );
+  addToCart: (product, quantity = 1) =>
+  set((state) => {
+    const existing = state.cart.find(
+      (item) => String(item._id) === String(product._id)
+    );
 
-      if (existing) {
-        return {
-          cart: state.cart.map((item) =>
-            String(item._id) === String(product._id)
-              ? { ...item, qty: item.qty + 1 }
-              : item
-          ),
-        };
-      }
-
+    if (existing) {
       return {
-        cart: [...state.cart, { ...product, qty: 1 }],
+        cart: state.cart.map((item) =>
+          String(item._id) === String(product._id)
+            ? { ...item, qty: item.qty + quantity }
+            : item
+        ),
       };
-    }),
+    }
+
+    return {
+      cart: [...state.cart, { ...product, qty: quantity }],
+    };
+  }),
+
 
   removeFromCart: (id) =>
     set((state) => ({

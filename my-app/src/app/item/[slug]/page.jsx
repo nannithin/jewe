@@ -2,12 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import useStore from "@/store/useStore";
 import { ChevronRight, Heart, Minus, Plus } from "lucide-react";
+import { showToast } from "nextjs-toast-notify";
 import React, { useState } from "react";
 
 export default function Item({ params }) {
   const [showAdditional, setShowAdditional] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
+  const { wishlist, addToWishlist, removeFromWishlist, addToCart, increaseQty, decreaseQty } = useStore();
   // Next.js 15 (client component)
   const { slug } = React.use(params);
 
@@ -16,7 +20,7 @@ export default function Item({ params }) {
   useState(() => {
     const fetchProduct = async () => {
       const res = await fetch(
-        `https://jewe-2w4e.onrender.com/api/products/${slug}`
+        `http://localhost:5000/api/products/${slug}`
       );
       const data = await res.json();
       setProduct(data);
@@ -24,6 +28,17 @@ export default function Item({ params }) {
 
     fetchProduct();
   }, []);
+
+  const isWishlisted = wishlist.some((item) => item._id === product?._id);
+
+  const handleWishlist = () => {
+    if (isWishlisted) {
+      removeFromWishlist(product._id);
+    } else {
+      addToWishlist(product);
+    }
+  };
+
 
   if (!product) return <p className="p-5">Loading...</p>;
 
@@ -63,15 +78,37 @@ export default function Item({ params }) {
 
           <div className="flex items-center gap-5">
             <div className="w-fit flex items-center justify-center gap-3 border p-1.5">
-              <Minus size={17} /> 1 <Plus size={17} />
+              <Minus
+                size={17}
+                className="cursor-pointer"
+                onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+              />
+              {quantity}
+              <Plus
+                size={17}
+                className="cursor-pointer"
+                onClick={() => setQuantity(quantity + 1)}
+              />
             </div>
-            <Button className={"bg-[#B5947C] border-none text-white"}>
+            <Button onClick={() => {
+              addToCart(product, quantity)
+              removeFromWishlist(product._id);
+              showToast.success("Item added to cart", {
+                duration: 4000,
+                progress: true,
+                position: "top-right",
+                transition: "popUp",
+                icon: '',
+                sound: true,
+              });
+
+            }} className={"bg-[#B5947C] border-none text-white"}>
               ADD TO CART
             </Button>
           </div>
 
-          <p className="flex items-center gap-2 text-sm py-2">
-            <Heart size={16} /> ADD TO WISHLIST
+          <p onClick={handleWishlist} className="flex items-center gap-2 text-sm py-2">
+            <Heart className={`${isWishlisted && "fill-[#B5947C] text-[#B5947C]"}`} size={16} /> {isWishlisted ? "REMOVE FROM WISHLIST" : "ADD TO WISHLIST"}
           </p>
 
           {/* Description header (unchanged) */}
