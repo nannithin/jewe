@@ -36,7 +36,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen  space-y-8 pb-[100px]">
-      <div className="relative w-full h-[270px] md:h-[600px]">
+      <div id="home" className="relative w-full h-[270px] md:h-[600px]">
 
         {/* Background Image */}
         <Image
@@ -65,8 +65,24 @@ export default function Home() {
         </div>
 
       </div>
-      <div>
-        <div className="grid md:grid-cols-3 px-5">
+      <ScrollArea className="w-full">
+        <div className="w-max md:mx-auto p-5 flex items-center gap-5 md:gap-8">
+          <div className="relative">
+            <Image src={bgimg} alt="bg" />
+            <div className="absolute top-0 left-0 p-8 space-y-2">
+              <p className="text-sm">FLAT DISCOUNT</p>
+              <p className="text-xl max-w-1/2 ">Necklaces & Body Jewels</p>
+              <a className="uppercase border-b text-sm border-black" href="">Shop now</a>
+            </div>
+          </div>
+          <div className="relative">
+            <Image src={bgimg} alt="bg" />
+            <div className="absolute top-0 left-0 p-8 space-y-2">
+              <p className="text-sm">FLAT DISCOUNT</p>
+              <p className="text-xl max-w-1/2 ">Necklaces & Body Jewels</p>
+              <a className="uppercase border-b text-sm border-black" href="">Shop now</a>
+            </div>
+          </div>
           <div className="relative">
             <Image src={bgimg} alt="bg" />
             <div className="absolute top-0 left-0 p-8 space-y-2">
@@ -76,12 +92,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="space-y-5 px-5">
+         <ScrollBar orientation="horizontal" />
+      </ScrollArea>
+      <div id="collections" className="space-y-5 px-5">
         <h1 className="text-2xl text-center">Popular Categories</h1>
 
         <ScrollArea className="w-full">
-          <div className="w-max py-5 flex items-center gap-5 md:gap-8">
+          <div className="w-max md:mx-auto py-5 flex items-center gap-5 md:gap-8">
             {cate.map((item, ind) => (
               <div key={ind} className="flex flex-col items-center gap-4">
                 <div className="h-36 w-36 rounded-full bg-[#F6F6F6]">
@@ -95,13 +112,13 @@ export default function Home() {
         </ScrollArea>
       </div>
 
-      <div className="px-5 space-y-5">
+      <div id="trending" className="px-5 space-y-5">
         <div className="text-center">
           <h1 className="text-2xl">Trendy Collection</h1>
           <p className="text-muted-foreground">Collect your loves with our newest arrivals.</p>
         </div>
         <ScrollArea className="w-full">
-          <div className="w-max py-5 flex items-center gap-5 md:gap-8">
+          <div className="w-max md:mx-auto py-5 flex items-center gap-5 md:gap-8">
             {products.map((product) => (
               <ItemCard key={product._id} product={product} />
             ))}
@@ -114,7 +131,7 @@ export default function Home() {
       <div className="bg-[#FEED9F] w-full h-11 flex items-center justify-center">
         <p className="text-[#B5947C]">Jewellery is like the icing on the cake.</p>
       </div>
-      <div className="w-full bg-[#FCF9F1] ">
+      <div id="about" className="w-full bg-[#FCF9F1] ">
         <div className="md:grid grid-cols-2 md:px-10 md:py-20">
           <div className="bg-white">
 
@@ -129,7 +146,7 @@ export default function Home() {
             <Button className={"border-[#B5947C] text-[#B5947C]"}>READ MORE</Button>
           </div>
         </div>
-        <div className="p-5 space-y-5">
+        <div id="reviews" className="p-5 space-y-5">
           <h1 className="text-2xl text-center">Customer Reviews</h1>
           <div className="space-y-3">
             <div className="w-30 h-30 mx-auto rounded-full bg-white"></div>

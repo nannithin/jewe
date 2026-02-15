@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import api from "@/lib/axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -42,7 +43,7 @@ export default function () {
   };
 
   return (
-    <div className="w-full p-12 px-5">
+    <div className="w-full md:max-w-md md:mx-auto p-12 px-5">
       <h1 className="text-3xl font-normal text-center">Login</h1>
 
       <form
@@ -82,7 +83,7 @@ export default function () {
 
         <p className="my-3">
           Don't have an account ?{" "}
-          <span className="text-[#B5947C] font-medium">Signup</span>
+          <Link href={"/auth/signup"}><span className="text-[#B5947C] font-medium cursor-pointer">Signup</span></Link>
         </p>
       </form>
     </div>

@@ -33,27 +33,40 @@ const Header = () => {
             )}
             <div className="relative z-10 md:h-20 h-16 flex items-center justify-between md:px-20 px-5 border-b border-[#E5E5E5]">
                 <div className="relative max-md:hidden">
-                    <Input type={"text"} placeholder={"Search Products"} className={"w-[270px]"} />
+                    <Input
+                        autoFocus
+                        placeholder="Search products..."
+                        className="w-[270px]"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" && query.trim()) {
+                                setOpenSearch(false);
+                                router.push(`/item?search=${query}`);
+                            }
+                        }}
+                    />
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-[#B3B3B3]" />
                 </div>
                 <Menu className="md:hidden" onClick={() => setOpen(prev => !prev)} />
                 <h1 className="md:absolute md:left-1/2 md:-translate-x-1/2 text-[20px] uppercase text-[#222222]">Nithin & CO</h1>
                 <div className="flex items-center gap-3">
-                    <User className="max-md:hidden" />
-                    <Heart className="max-md:hidden" />
-                    <Link href={"/cart"}><ShoppingCart /></Link>
+                    <Link href={"/profile"}><User className="max-md:hidden" /></Link>
+                    <Link href={"/wishlist"}><Heart className="max-md:hidden" /></Link>
+                    <Link href="/cart"><Link href={"/cart"}><ShoppingCart /></Link></Link>
                 </div>
             </div>
             <div className="h-12 max-md:hidden flex items-center justify-between px-20 border-b border-[#E5E5E5] text-[13px]">
                 <h2>BROWSE COLLECTIONS</h2>
                 <div>
                     <ul className="list-none flex items-center gap-4">
-                        <li>HOME</li>
-                        <li>COLLECTIONS</li>
-                        <li>HOME</li>
-                        <li>COLLECTIONS</li>
-                        <li>HOME</li>
-                        <li>COLLECTIONS</li>
+                        <Link href="/#home" className="cursor-pointer">HOME</Link>
+                        <Link href="/#collections" className="cursor-pointer">COLLECTIONS</Link>
+                        <Link href="/#trending" className="cursor-pointer">TRENDING</Link>
+                        <Link href="/#about" className="cursor-pointer">ABOUT</Link>
+                        <Link href="/#reviews" className="cursor-pointer">REVIEWS</Link>
+                        <Link href="/profile" className="cursor-pointer">MY ACCOUNT</Link>
+
                     </ul>
                 </div>
                 <div>
