@@ -18,14 +18,14 @@ export default function PaymentForm() {
     transactionId: '',
     amount: '',
   })
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const { id } = useParams();
 
   const handleCopyUPI = (upi) => {
     navigator.clipboard.writeText(upi)
-    setCopied(true)
+    setCopied(upi)
     setTimeout(() => setCopied(false), 2000)
   }
 
@@ -111,14 +111,14 @@ export default function PaymentForm() {
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-muted-foreground mb-2">UPI ID</p>
-                  <div className="flex items-center gap-2 bg-white rounded-lg p-3 border border-border">
+                  <div className="flex items-center gap-2 bg-white rounded-lg p-3 border border-border mb-2">
                     <code className="text-sm font-medium text-foreground flex-1">7494825586@ybl</code>
                     <button
                       onClick={() => handleCopyUPI('7494825586@ybl')}
                       className="p-1.5 hover:bg-secondary rounded transition-colors"
                       aria-label="Copy UPI ID"
                     >
-                      {copied ? (
+                      {copied === "7494825586@ybl" ? (
                         <Check className="w-4 h-4 text-primary" />
                       ) : (
                         <Copy className="w-4 h-4 text-muted-foreground hover:text-foreground" />
@@ -132,7 +132,7 @@ export default function PaymentForm() {
                       className="p-1.5 hover:bg-secondary rounded transition-colors"
                       aria-label="Copy UPI ID"
                     >
-                      {copied ? (
+                      {copied === "7494825586@ibl" ? (
                         <Check className="w-4 h-4 text-primary" />
                       ) : (
                         <Copy className="w-4 h-4 text-muted-foreground hover:text-foreground" />
