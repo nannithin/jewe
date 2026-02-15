@@ -44,7 +44,12 @@ export default function Cart() {
                                 <h1 className="text-sm font-medium">{item.title}</h1>
                                 <X
                                     className="cursor-pointer"
-                                    onClick={() => removeFromCart(item._id)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        removeFromCart(item._id)
+
+                                    }}
                                 />
                             </div>
 
@@ -59,13 +64,22 @@ export default function Cart() {
                                     <Minus
                                         size={17}
                                         className="cursor-pointer"
-                                        onClick={() => decreaseQty(item._id)}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            decreaseQty(item._id)}
+                                        }
                                     />
                                     {item.qty}
                                     <Plus
                                         size={17}
                                         className="cursor-pointer"
-                                        onClick={() => increaseQty(item._id)}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            increaseQty(item._id)
+
+                                        }}
                                     />
                                 </div>
                             </div>

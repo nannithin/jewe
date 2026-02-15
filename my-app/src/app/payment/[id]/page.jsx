@@ -128,7 +128,7 @@ export default function PaymentForm() {
                   <div className="flex items-center gap-2 bg-white rounded-lg p-3 border border-border">
                     <code className="text-sm font-medium text-foreground flex-1">7494825586@ibl</code>
                     <button
-                      onClick={() => handleCopyUPI('7494825586iybl')}
+                      onClick={() => handleCopyUPI('7494825586@ibl')}
                       className="p-1.5 hover:bg-secondary rounded transition-colors"
                       aria-label="Copy UPI ID"
                     >

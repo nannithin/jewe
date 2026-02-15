@@ -42,7 +42,12 @@ export default function Wishlist() {
                 <h1 className="text-sm font-medium">{item.title}</h1>
                 <X
                   className="cursor-pointer"
-                  onClick={() => removeFromWishlist(item._id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    removeFromWishlist(item._id)
+
+                  }}
                 />
               </div>
 
@@ -51,7 +56,9 @@ export default function Wishlist() {
               <Button
                 variant="link"
                 className="p-0 h-auto text-sm"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
                   addToCart(item);
                   removeFromWishlist(item._id);
                   showToast.success("Item added to cart", {
