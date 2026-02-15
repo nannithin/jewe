@@ -23,8 +23,8 @@ export default function PaymentForm() {
   const [submitted, setSubmitted] = useState(false)
   const { id } = useParams();
 
-  const handleCopyUPI = () => {
-    navigator.clipboard.writeText('nithin@okaxis')
+  const handleCopyUPI = (upi) => {
+    navigator.clipboard.writeText(upi)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -83,7 +83,7 @@ export default function PaymentForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/30 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/30 flex items-center justify-center p-4 pb-32">
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="mb-8">
@@ -112,9 +112,23 @@ export default function PaymentForm() {
                 <div>
                   <p className="text-sm text-muted-foreground mb-2">UPI ID</p>
                   <div className="flex items-center gap-2 bg-white rounded-lg p-3 border border-border">
-                    <code className="text-sm font-medium text-foreground flex-1">nithin@okaxis</code>
+                    <code className="text-sm font-medium text-foreground flex-1">7494825586@ybl</code>
                     <button
-                      onClick={handleCopyUPI}
+                      onClick={() => handleCopyUPI('7494825586@ybl')}
+                      className="p-1.5 hover:bg-secondary rounded transition-colors"
+                      aria-label="Copy UPI ID"
+                    >
+                      {copied ? (
+                        <Check className="w-4 h-4 text-primary" />
+                      ) : (
+                        <Copy className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+                      )}
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white rounded-lg p-3 border border-border">
+                    <code className="text-sm font-medium text-foreground flex-1">7494825586@ibl</code>
+                    <button
+                      onClick={() => handleCopyUPI('7494825586iybl')}
                       className="p-1.5 hover:bg-secondary rounded transition-colors"
                       aria-label="Copy UPI ID"
                     >
