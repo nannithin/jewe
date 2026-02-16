@@ -145,35 +145,35 @@ export default function Home() {
         <h1 className="text-2xl text-center">Popular Categories</h1>
         <div className="w-full max-w-6xl mx-auto md:px-4">
           <Carousel
-        opts={{
-          align: 'start',
-          loop: false,
-          slidesToScroll: 2,
-        }}
-        className="relative"
-      >
-          <CarouselContent className="-ml-1">
-            {cate.map((item, ind) => (
-              <CarouselItem key={ind} className="basis-1/2 pl-1 lg:basis-1/3">
-                <div
-                className="flex-[0_0_50%] md:flex-[0_0_33.33%] flex flex-col items-center gap-4"
-              >
-                <div className="h-36 w-36 rounded-full border overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={144}
-                    height={144}
-                    className="rounded-full object-cover"
-                  />
-                </div>
-                <p className="font-medium">{item.title}</p>
-              </div>
-              </CarouselItem>
-              
-            ))}
-          </CarouselContent>
-        </Carousel>
+            opts={{
+              align: 'center',
+              loop: false,
+              slidesToScroll: 2,
+            }}
+            className="relative"
+          >
+            <CarouselContent className="-ml-1 justify-center">
+              {cate.map((item, ind) => (
+                <CarouselItem key={ind} className="basis-1/2 pl-1 lg:basis-1/5">
+                  <div
+                    className="flex-[0_0_50%] md:flex-[0_0_33.33%] flex flex-col items-center gap-4"
+                  >
+                    <div className="h-36 w-36 rounded-full border overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={144}
+                        height={144}
+                        className="rounded-full object-cover"
+                      />
+                    </div>
+                    <p className="font-medium">{item.title}</p>
+                  </div>
+                </CarouselItem>
+
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </div>
 
@@ -182,16 +182,25 @@ export default function Home() {
           <h1 className="text-2xl">Trendy Collection</h1>
           <p className="text-muted-foreground">Collect your loves with our newest arrivals.</p>
         </div>
-        <ScrollArea className="w-full">
-          <div className="w-max md:mx-auto py-5 flex items-center gap-5 md:gap-8">
-            {products.map((product) => (
-              <ItemCard key={product._id} product={product} />
-            ))}
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        <div className="w-full max-w-6xl mx-auto md:px-4">
+          <Carousel
+            opts={{
+              align: 'center',
+              loop: false,
+              slidesToScroll: 2,
+            }}
+            className="relative"
+          >
+            <CarouselContent className="-ml-1 justify-center">
+              {products.map((product,ind) => (
+                <CarouselItem key={ind} className="basis-1/2 pl-1 lg:basis-1/5">
+                  <ItemCard key={product._id} product={product} />
+                </CarouselItem>
 
-
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
       </div>
       <div className="bg-[#FEED9F] w-full h-11 flex items-center justify-center">
         <p className="text-[#B5947C]">Jewellery is like the icing on the cake.</p>
@@ -220,18 +229,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="embla">
-        <div className="embla__viewport" ref={emblaRef}>
-          <div className="embla__container">
-            <div className="embla__slide">Slide 1</div>
-            <div className="embla__slide">Slide 2</div>
-            <div className="embla__slide">Slide 3</div>
-          </div>
-        </div>
 
-        <button className="embla__prev">Scroll to prev</button>
-        <button className="embla__next">Scroll to next</button>
-      </div>
     </div>
   );
 }
