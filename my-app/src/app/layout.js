@@ -19,14 +19,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" class="scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <Header />
 
         {/* Add padding equal to header height */}
-        <main className="pt-[112px] md:pt-[128px]">
+        <main className="pt-16 md:pt-28">
           {children}
         </main>
       </body>

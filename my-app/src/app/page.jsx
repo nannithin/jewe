@@ -10,10 +10,29 @@ import Image from "next/image";
 import earning from "../../public/earnings.jpg"
 import bg from "../../public/download.jpg"
 import bgimg from "../../public/download (1).jpg"
+import necklace from "../../public/necklace.jpg"
+import rings from "../../public/rings.jpg"
+import bracel from '../../public/bracelets.jpg'
+import useEmblaCarousel from "embla-carousel-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from '@/components/ui/carousel'
+
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    loop: false,
+    slidesToScroll: 2, // 🔥 Jump 2 items
+    breakpoints: {
+      "(min-width: 768px)": { slidesToScroll: 3 },
+    },
+  });
   useEffect(() => {
     const fetchLatestProducts = async () => {
       try {
@@ -27,11 +46,23 @@ export default function Home() {
     fetchLatestProducts();
   }, []);
   const [cate, setCate] = useState([
-    "Necklaces",
-    "Rings",
-    "Bracelets",
-    "Earnings",
-    "watches"
+    {
+      title: "Necklaces",
+      image: necklace
+    },
+    {
+      title: "Rings",
+      image: rings
+    },
+    {
+      title: "Bracelets",
+      image: bracel
+    },
+    {
+      title: "Earnings",
+      image: earning
+    },
+
   ])
 
   return (
@@ -58,58 +89,92 @@ export default function Home() {
               Perfect Match for Elegant Impression
             </h1>
 
-            <Button className="mt-3">
+            <a href="#trending"><Button className="mt-3">
               SHOP NOW
-            </Button>
+            </Button></a>
           </div>
         </div>
 
       </div>
       <ScrollArea className="w-full">
-        <div className="w-max md:mx-auto p-5 flex items-center gap-5 md:gap-8">
-          <div className="relative">
-            <Image src={bgimg} alt="bg" />
-            <div className="absolute top-0 left-0 p-8 space-y-2">
+        <div className="flex md:justify-center p-5 gap-5 md:gap-8">
+
+          <div className="relative min-w-[350px] max-md:mx-auto md:min-w-[350px]">
+            <Image src={bgimg} alt="bg" className="w-full h-auto" />
+            <div className="absolute top-0 left-0 p-6 space-y-2">
               <p className="text-sm">FLAT DISCOUNT</p>
-              <p className="text-xl max-w-1/2 ">Necklaces & Body Jewels</p>
-              <a className="uppercase border-b text-sm border-black" href="">Shop now</a>
+              <p className="text-xl max-w-[60%]">
+                Necklaces & Body Jewels
+              </p>
+              <a href="#collections" className="uppercase border-b text-sm border-black">
+                Shop now
+              </a>
             </div>
           </div>
-          <div className="relative">
-            <Image src={bgimg} alt="bg" />
-            <div className="absolute top-0 left-0 p-8 space-y-2">
+          <div className="relative min-w-[350px] max-md:mx-auto md:min-w-[350px]">
+            <Image src={bgimg} alt="bg" className="w-full h-auto" />
+            <div className="absolute top-0 left-0 p-6 space-y-2">
               <p className="text-sm">FLAT DISCOUNT</p>
-              <p className="text-xl max-w-1/2 ">Necklaces & Body Jewels</p>
-              <a className="uppercase border-b text-sm border-black" href="">Shop now</a>
+              <p className="text-xl max-w-[60%]">
+                Necklaces & Body Jewels
+              </p>
+              <a className="uppercase border-b text-sm border-black">
+                Shop now
+              </a>
             </div>
           </div>
-          <div className="relative">
-            <Image src={bgimg} alt="bg" />
-            <div className="absolute top-0 left-0 p-8 space-y-2">
+          <div className="relative min-w-[350px] max-md:mx-auto md:min-w-[350px]">
+            <Image src={bgimg} alt="bg" className="w-full h-auto" />
+            <div className="absolute top-0 left-0 p-6 space-y-2">
               <p className="text-sm">FLAT DISCOUNT</p>
-              <p className="text-xl max-w-1/2 ">Necklaces & Body Jewels</p>
-              <a className="uppercase border-b text-sm border-black" href="">Shop now</a>
+              <p className="text-xl max-w-[60%]">
+                Necklaces & Body Jewels
+              </p>
+              <a className="uppercase border-b text-sm border-black">
+                Shop now
+              </a>
             </div>
           </div>
+
         </div>
-         <ScrollBar orientation="horizontal" />
+
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
+
       <div id="collections" className="space-y-5 px-5">
         <h1 className="text-2xl text-center">Popular Categories</h1>
-
-        <ScrollArea className="w-full">
-          <div className="w-max md:mx-auto py-5 flex items-center gap-5 md:gap-8">
+        <div className="w-full max-w-6xl mx-auto md:px-4">
+          <Carousel
+        opts={{
+          align: 'start',
+          loop: false,
+          slidesToScroll: 2,
+        }}
+        className="relative"
+      >
+          <CarouselContent className="-ml-1">
             {cate.map((item, ind) => (
-              <div key={ind} className="flex flex-col items-center gap-4">
-                <div className="h-36 w-36 rounded-full bg-[#F6F6F6]">
-                  <Image src={earning} alt="earrings" />
+              <CarouselItem key={ind} className="basis-1/2 pl-1 lg:basis-1/3">
+                <div
+                className="flex-[0_0_50%] md:flex-[0_0_33.33%] flex flex-col items-center gap-4"
+              >
+                <div className="h-36 w-36 rounded-full border overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={144}
+                    height={144}
+                    className="rounded-full object-cover"
+                  />
                 </div>
-                <p className="font-medium">{item}</p>
+                <p className="font-medium">{item.title}</p>
               </div>
+              </CarouselItem>
+              
             ))}
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+          </CarouselContent>
+        </Carousel>
+        </div>
       </div>
 
       <div id="trending" className="px-5 space-y-5">
@@ -155,7 +220,18 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div className="embla">
+        <div className="embla__viewport" ref={emblaRef}>
+          <div className="embla__container">
+            <div className="embla__slide">Slide 1</div>
+            <div className="embla__slide">Slide 2</div>
+            <div className="embla__slide">Slide 3</div>
+          </div>
+        </div>
 
+        <button className="embla__prev">Scroll to prev</button>
+        <button className="embla__next">Scroll to next</button>
+      </div>
     </div>
   );
 }
