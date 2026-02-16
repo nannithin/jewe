@@ -89,7 +89,7 @@ export default function Home() {
               Perfect Match for Elegant Impression
             </h1>
 
-            <a href="#trending"><Button className="mt-3">
+            <a href="#trending"><Button variant="outline" className="mt-3 border-black">
               SHOP NOW
             </Button></a>
           </div>
@@ -183,24 +183,27 @@ export default function Home() {
           <p className="text-muted-foreground">Collect your loves with our newest arrivals.</p>
         </div>
         <div className="w-full max-w-6xl mx-auto md:px-4">
-          <Carousel
-            opts={{
-              align: 'center',
-              loop: false,
-              slidesToScroll: 2,
-            }}
-            className="relative"
-          >
-            <CarouselContent className="-ml-1 justify-center">
-              {products.map((product,ind) => (
-                <CarouselItem key={ind} className="basis-1/2 pl-1 lg:basis-1/5">
-                  <ItemCard key={product._id} product={product} />
-                </CarouselItem>
+  <Carousel
+    opts={{
+      align: "start",   // 🔥 use start for multi items
+      loop: false,
+      slidesToScroll: 1,
+    }}
+    className="relative"
+  >
+    <CarouselContent>
+      {products.map((product, ind) => (
+        <CarouselItem
+          key={product._id}
+          className="basis-1/2 md:basis-1/3 lg:basis-1/5"
+        >
+          <ItemCard product={product} />
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+  </Carousel>
+</div>
 
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
       </div>
       <div className="bg-[#FEED9F] w-full h-11 flex items-center justify-center">
         <p className="text-[#B5947C]">Jewellery is like the icing on the cake.</p>
@@ -217,7 +220,7 @@ export default function Home() {
               <p> On even feet time have an no at. Relation so in confined smallest children unpacked delicate. Why sir end believe uncivil respect. Always get adieus nature day course for common. My little garret repair to desire he esteem.</p>
               <p> Improve ashamed married expense bed her comfort pursuit mrs.</p>
             </div>
-            <Button className={"border-[#B5947C] text-[#B5947C]"}>READ MORE</Button>
+            <Button variant="outline" className={"border-[#B5947C] text-[#B5947C]"}>READ MORE</Button>
           </div>
         </div>
         <div id="reviews" className="p-5 space-y-5">
