@@ -11,7 +11,7 @@ export default function CustomerCarePage() {
         {/* Shop Address */}
         <div className="pt-4 border-t">
           <p className="font-semibold mb-1">Shop Address:</p>
-          <p>Branch – Brij Wasi Colony</p>
+          <p>Brij Wasi Colony</p>
           <p>Gali-1, Bhiwani (Haryana)</p>
         </div>
 
