@@ -42,7 +42,7 @@ export default function SearchClient() {
   }
 
   return (
-    <div className="p-5 space-y-5 pb-32">
+    <div className="p-5 space-y-5 pb-32 pt-16">
       <h1 className="text-xl">
         Search results for “{search}”
       </h1>
