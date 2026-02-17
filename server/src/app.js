@@ -9,7 +9,7 @@ import orderRoutes from "./routes/order.routes.js";
 const app = express();
 app.use(
   cors({
-    origin: "https://jewe-five.vercel.app",
+    origin: "https://kalka-jeweller.vercel.app",
     credentials: true,
   })
 );
