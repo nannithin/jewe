@@ -5,9 +5,17 @@ export default function CustomerCarePage() {
 
       <div className="bg-white p-6 rounded-2xl shadow-sm border space-y-4">
         <p><strong>Email:</strong> support@yourjewellery.com</p>
-        <p><strong>Phone:</strong> +91 9876543210</p>
+        <p><strong>Phone:</strong> +91 7494825586</p>
         <p><strong>Working Hours:</strong> 10 AM – 7 PM</p>
-        <p className="text-muted-foreground text-sm">
+
+        {/* Shop Address */}
+        <div className="pt-4 border-t">
+          <p className="font-semibold mb-1">Shop Address:</p>
+          <p>Branch – Brij Wasi Colony</p>
+          <p>Gali-1, Bhiwani (Haryana)</p>
+        </div>
+
+        <p className="text-muted-foreground text-sm pt-2">
           We’re here to help you with your precious purchases 💎
         </p>
       </div>
