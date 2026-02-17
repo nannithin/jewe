@@ -29,7 +29,7 @@ export default function CustomerCarePage() {
           <div className="bg-card border border-border rounded-lg lg:p-8 md:p-6 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-start gap-2 md:gap-4 mb-4">
               <div className="p-3 bg-accent/10 rounded-lg">
-                <Mail className="w-6 h-6 text-accent" />
+                <Mail className="w-6 h-6 text-[#B5947C]" />
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
@@ -47,7 +47,7 @@ export default function CustomerCarePage() {
           <div className="bg-card border border-border rounded-lg lg:p-8 md:p-6 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-start gap-2 md:gap-4 mb-4">
               <div className="p-3 bg-accent/10 rounded-lg">
-                <Phone className="w-6 h-6 text-accent" />
+                <Phone className="w-6 h-6 text-[#B5947C]" />
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
@@ -65,7 +65,7 @@ export default function CustomerCarePage() {
           <div className="bg-card border border-border rounded-lg lg:p-8 md:p-6 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-start gap-2 md:gap-4 mb-4">
               <div className="p-3 bg-accent/10 rounded-lg">
-                <Clock className="w-6 h-6 text-accent" />
+                <Clock  className="w-6 h-6 text-[#B5947C]" />
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
@@ -83,7 +83,7 @@ export default function CustomerCarePage() {
           <div className="bg-card border border-border rounded-lg lg:p-8 md:p-6 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-start gap-2 md:gap-4 mb-4">
               <div className="p-3 bg-accent/10 rounded-lg">
-                <MapPin className="w-6 h-6 text-accent" />
+                <MapPin className="w-6 h-6  text-[#B5947C]" />
               </div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
@@ -103,7 +103,7 @@ export default function CustomerCarePage() {
           <h2 className="text-2xl font-light mb-8 tracking-tight">Shop Location</h2>
           <div className="space-y-4">
             <div className="flex gap-4">
-              <div className="text-accent font-semibold tracking-wide text-sm min-w-fit">
+              <div className="text-[#B5947C] font-semibold tracking-wide text-sm min-w-fit">
                 ADDRESS
               </div>
               <div className="text-foreground font-light">
