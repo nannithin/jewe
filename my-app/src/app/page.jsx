@@ -96,7 +96,7 @@ export default function Home() {
         </div>
 
       </div>
-      <div className="w-full max-w-6xl mx-auto md:px-4 px-4">
+      <div className="w-full max-w-6xl mx-auto px-4">
         <Carousel
           opts={{
             align: "start",
@@ -160,9 +160,9 @@ export default function Home() {
       </div>
 
 
-      <div id="collections" className="space-y-5 px-5">
+      <div id="collections" className="space-y-5 px-4 md:px-5">
         <h1 className="text-2xl text-center">Popular Categories</h1>
-        <div className="w-full max-w-6xl mx-auto px-4">
+        <div className="w-full max-w-6xl mx-auto ">
           <Carousel
             opts={{
               align: "start",
@@ -197,7 +197,7 @@ export default function Home() {
 
       </div>
 
-      <div id="trending" className="px-5 space-y-5">
+      <div id="trending" className="px-4 space-y-5">
         <div className="text-center">
           <h1 className="text-2xl">Trendy Collection</h1>
           <p className="text-muted-foreground">Collect your loves with our newest arrivals.</p>
