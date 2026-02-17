@@ -179,7 +179,7 @@ export default function Home() {
                   key={ind}
                   className="pl-4 basis-1/2 lg:basis-1/5"
                   onClick={() => {
-                    router.push(`/item?search=${item}`)
+                    router.push(`/item?search=${item.title}`)
                   }}
                 >
                   <div className="flex flex-col items-center gap-4">
