@@ -123,16 +123,16 @@ const Header = () => {
             </div>
             {/* BOTTOM NAV */}
             <div className="md:hidden fixed z-30 bottom-0 h-18 w-full bg-white border-t flex items-center justify-between px-5">
-                <Link href={"/"} className="flex flex-col items-center gap-1 list-none">
+                <Link href={"/"} onClick={() => setOpenSearch(false)} className="flex flex-col items-center gap-1 list-none">
                     <Home size={20} />
-                    <li className="text-[13px]">Home</li>
+                    <span className="text-[13px]">Home</span>
                 </Link>
 
                 <div onClick={() => setOpenSearch(true)} className="flex flex-col items-center gap-1 list-none"><Search size={20} />
                     <li className="text-[13px]">Search</li></div>
-                <Link href={"/wishlist"} className="flex flex-col items-center gap-1 list-none">
+                <Link href={"/wishlist"} onClick={() => setOpenSearch(false)} className="flex flex-col items-center gap-1 list-none">
                     <Heart size={20} />
-                    <li className="text-[13px]">Wishlist</li></Link>
+                    <span className="text-[13px]">Wishlist</span></Link>
                 <div
                     onClick={async () => {
                         try {
@@ -150,7 +150,7 @@ const Header = () => {
                     className="flex flex-col items-center gap-1 list-none cursor-pointer"
                 >
                     <User size={20} />
-                    <li className="text-[13px]">Account</li>
+                    <span className="text-[13px]">Account</span>
                 </div>
 
             </div>
@@ -171,6 +171,7 @@ const Header = () => {
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={(e) => {
                         if (e.key === "Enter" && query.trim()) {
+                            setQuery("")
                             setOpenSearch(false);
                             router.push(`/item?search=${query}`);
                         }
