@@ -96,7 +96,7 @@ export default function Home() {
         </div>
 
       </div>
-      <div className="w-full max-w-6xl mx-auto md:px-4">
+      <div className="w-full max-w-6xl mx-auto md:px-4 px-4">
         <Carousel
           opts={{
             align: "start",
@@ -163,37 +163,37 @@ export default function Home() {
       <div id="collections" className="space-y-5 px-5">
         <h1 className="text-2xl text-center">Popular Categories</h1>
         <div className="w-full max-w-6xl mx-auto px-4">
-  <Carousel
-    opts={{
-      align: "start",
-      loop: false,
-      slidesToScroll: 1,
-    }}
-    className="relative"
-  >
-    <CarouselContent className="-ml-4">
-      {cate.map((item, ind) => (
-        <CarouselItem
-          key={ind}
-          className="pl-4 basis-1/2 lg:basis-1/5"
-        >
-          <div className="flex flex-col items-center gap-4">
-            <div className="h-36 w-36 rounded-full border overflow-hidden">
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={144}
-                height={144}
-                className="rounded-full object-cover"
-              />
-            </div>
-            <p className="font-medium text-center">{item.title}</p>
-          </div>
-        </CarouselItem>
-      ))}
-    </CarouselContent>
-  </Carousel>
-</div>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: false,
+              slidesToScroll: 1,
+            }}
+            className="relative"
+          >
+            <CarouselContent className="-ml-4">
+              {cate.map((item, ind) => (
+                <CarouselItem
+                  key={ind}
+                  className="pl-4 basis-1/2 lg:basis-1/5"
+                >
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="h-36 w-36 rounded-full border overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={144}
+                        height={144}
+                        className="rounded-full object-cover"
+                      />
+                    </div>
+                    <p className="font-medium text-center">{item.title}</p>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
 
       </div>
 
