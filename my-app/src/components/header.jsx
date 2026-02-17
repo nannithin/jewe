@@ -2,7 +2,7 @@
 
 import { Heart, Home, Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { Input } from "./ui/input";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import api from "@/lib/axios";
@@ -13,6 +13,7 @@ const Header = () => {
     const [query, setQuery] = useState("")
     const [showHeader, setShowHeader] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const inputRef = useRef(null)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -139,11 +140,14 @@ const Header = () => {
                             const res = await api.get("/products/dashboard");
 
                             if (res.status === 200) {
+                                setOpenSearch(false)
                                 router.push("/profile");
                             } else if (res.status === 401) {
+                                setOpenSearch(false)
                                 router.push("/auth/login");
                             }
                         } catch (error) {
+                            setOpenSearch(false)
                             router.push("/auth/login");
                         }
                     }}
@@ -164,6 +168,7 @@ const Header = () => {
                     onClick={() => setOpenSearch(false)}
                 />
                 <Input
+                    ref={inputRef}
                     autoFocus
                     placeholder="Search products..."
                     className="flex-1"
@@ -172,6 +177,7 @@ const Header = () => {
                     onKeyDown={(e) => {
                         if (e.key === "Enter" && query.trim()) {
                             setQuery("")
+                            inputRef.current?.blur();
                             setOpenSearch(false);
                             router.push(`/item?search=${query}`);
                         }
