@@ -96,85 +96,105 @@ export default function Home() {
         </div>
 
       </div>
-      <ScrollArea className="w-full">
-        <div className="flex md:justify-center p-5 gap-5 md:gap-8">
+      <div className="w-full max-w-6xl mx-auto md:px-4">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: false,
+            slidesToScroll: 1,
+          }}
+          className="relative"
+        >
+          <CarouselContent>
 
-          <div className="relative min-w-[350px] max-md:mx-auto md:min-w-[350px]">
-            <Image src={bgimg} alt="bg" className="w-full h-auto" />
-            <div className="absolute top-0 left-0 p-6 space-y-2">
-              <p className="text-sm">FLAT DISCOUNT</p>
-              <p className="text-xl max-w-[60%]">
-                Necklaces & Body Jewels
-              </p>
-              <a href="#collections" className="uppercase border-b text-sm border-black">
-                Shop now
-              </a>
-            </div>
-          </div>
-          <div className="relative min-w-[350px] max-md:mx-auto md:min-w-[350px]">
-            <Image src={bgimg} alt="bg" className="w-full h-auto" />
-            <div className="absolute top-0 left-0 p-6 space-y-2">
-              <p className="text-sm">FLAT DISCOUNT</p>
-              <p className="text-xl max-w-[60%]">
-                Necklaces & Body Jewels
-              </p>
-              <a className="uppercase border-b text-sm border-black">
-                Shop now
-              </a>
-            </div>
-          </div>
-          <div className="relative min-w-[350px] max-md:mx-auto md:min-w-[350px]">
-            <Image src={bgimg} alt="bg" className="w-full h-auto" />
-            <div className="absolute top-0 left-0 p-6 space-y-2">
-              <p className="text-sm">FLAT DISCOUNT</p>
-              <p className="text-xl max-w-[60%]">
-                Necklaces & Body Jewels
-              </p>
-              <a className="uppercase border-b text-sm border-black">
-                Shop now
-              </a>
-            </div>
-          </div>
+            {/* ITEM 1 */}
+            <CarouselItem className="basis-full md:basis-1/3">
+              <div className="relative">
+                <Image src={bgimg} alt="bg" className="w-full h-auto" />
+                <div className="absolute top-0 left-0 p-6 space-y-2">
+                  <p className="text-sm">FLAT DISCOUNT</p>
+                  <p className="text-xl max-w-[60%]">
+                    Necklaces & Body Jewels
+                  </p>
+                  <a href="#collections" className="uppercase border-b text-sm border-black">
+                    Shop now
+                  </a>
+                </div>
+              </div>
+            </CarouselItem>
 
-        </div>
+            {/* ITEM 2 */}
+            <CarouselItem className="basis-full md:basis-1/3">
+              <div className="relative">
+                <Image src={bgimg} alt="bg" className="w-full h-auto" />
+                <div className="absolute top-0 left-0 p-6 space-y-2">
+                  <p className="text-sm">FLAT DISCOUNT</p>
+                  <p className="text-xl max-w-[60%]">
+                    Necklaces & Body Jewels
+                  </p>
+                  <a className="uppercase border-b text-sm border-black">
+                    Shop now
+                  </a>
+                </div>
+              </div>
+            </CarouselItem>
 
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+            {/* ITEM 3 */}
+            <CarouselItem className="basis-full md:basis-1/3">
+              <div className="relative">
+                <Image src={bgimg} alt="bg" className="w-full h-auto" />
+                <div className="absolute top-0 left-0 p-6 space-y-2">
+                  <p className="text-sm">FLAT DISCOUNT</p>
+                  <p className="text-xl max-w-[60%]">
+                    Necklaces & Body Jewels
+                  </p>
+                  <a className="uppercase border-b text-sm border-black">
+                    Shop now
+                  </a>
+                </div>
+              </div>
+            </CarouselItem>
+
+          </CarouselContent>
+        </Carousel>
+      </div>
+
 
       <div id="collections" className="space-y-5 px-5">
         <h1 className="text-2xl text-center">Popular Categories</h1>
-        <div className="w-full max-w-6xl mx-auto md:px-4">
-          <Carousel
-            opts={{
-              align: 'center',
-              loop: false,
-              slidesToScroll: 2,
-            }}
-            className="relative"
-          >
-            <CarouselContent className="-ml-1 justify-center">
-              {cate.map((item, ind) => (
-                <CarouselItem key={ind} className="basis-1/2 pl-1 lg:basis-1/5">
-                  <div
-                    className="flex-[0_0_50%] md:flex-[0_0_33.33%] flex flex-col items-center gap-4"
-                  >
-                    <div className="h-36 w-36 rounded-full border overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        width={144}
-                        height={144}
-                        className="rounded-full object-cover"
-                      />
-                    </div>
-                    <p className="font-medium">{item.title}</p>
-                  </div>
-                </CarouselItem>
+        <div className="w-full max-w-6xl mx-auto px-4">
+  <Carousel
+    opts={{
+      align: "start",
+      loop: false,
+      slidesToScroll: 1,
+    }}
+    className="relative"
+  >
+    <CarouselContent className="-ml-4">
+      {cate.map((item, ind) => (
+        <CarouselItem
+          key={ind}
+          className="pl-4 basis-1/2 lg:basis-1/5"
+        >
+          <div className="flex flex-col items-center gap-4">
+            <div className="h-36 w-36 rounded-full border overflow-hidden">
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={144}
+                height={144}
+                className="rounded-full object-cover"
+              />
+            </div>
+            <p className="font-medium text-center">{item.title}</p>
+          </div>
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+  </Carousel>
+</div>
 
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
       </div>
 
       <div id="trending" className="px-5 space-y-5">
@@ -183,26 +203,26 @@ export default function Home() {
           <p className="text-muted-foreground">Collect your loves with our newest arrivals.</p>
         </div>
         <div className="w-full max-w-6xl mx-auto md:px-4">
-  <Carousel
-    opts={{
-      align: "start",   // 🔥 use start for multi items
-      loop: false,
-      slidesToScroll: 1,
-    }}
-    className="relative"
-  >
-    <CarouselContent>
-      {products.map((product, ind) => (
-        <CarouselItem
-          key={product._id}
-          className="basis-1/2 md:basis-1/3 lg:basis-1/5"
-        >
-          <ItemCard product={product} />
-        </CarouselItem>
-      ))}
-    </CarouselContent>
-  </Carousel>
-</div>
+          <Carousel
+            opts={{
+              align: "start",   // 🔥 use start for multi items
+              loop: false,
+              slidesToScroll: 1,
+            }}
+            className="relative"
+          >
+            <CarouselContent>
+              {products.map((product, ind) => (
+                <CarouselItem
+                  key={product._id}
+                  className="basis-1/2 md:basis-1/3 lg:basis-1/5"
+                >
+                  <ItemCard product={product} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
 
       </div>
       <div className="bg-[#FEED9F] w-full h-11 flex items-center justify-center">

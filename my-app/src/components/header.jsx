@@ -81,7 +81,7 @@ const Header = () => {
                     <div className="flex items-center gap-3">
                         <Link href={"/profile"}><User className="max-md:hidden" /></Link>
                         <Link href={"/wishlist"}><Heart className="max-md:hidden" /></Link>
-                        <Link href="/cart"><Link href={"/cart"}><ShoppingCart /></Link></Link>
+                        <Link href={"/cart"}><ShoppingCart /></Link>
                     </div>
                 </div>
                 <div className="h-12 max-md:hidden flex items-center justify-between px-20 border-b border-[#E5E5E5] text-[13px]">
