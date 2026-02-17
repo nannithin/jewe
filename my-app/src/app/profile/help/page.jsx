@@ -1,10 +1,11 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 
 export default function CustomerCarePage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground pb-32">
       {/* Header Section */}
       <div className="bg-gradient-to-b from-background to-muted/30 px-6 py-16 sm:py-24">
         <div className="max-w-2xl mx-auto text-center">
@@ -21,12 +22,12 @@ export default function CustomerCarePage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-6 py-12 sm:py-16">
+      <div className="max-w-4xl mx-auto md:px-6 px-3 py-12 sm:py-16">
         {/* Contact Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 gap-6 mb-12 items-center justify-center">
           {/* Email Card */}
-          <div className="bg-card border border-border rounded-lg p-8 hover:shadow-md transition-shadow">
-            <div className="flex items-start gap-4 mb-4">
+          <div className="bg-card border border-border rounded-lg lg:p-8 md:p-6 p-4 hover:shadow-md transition-shadow">
+            <div className="flex items-start gap-2 md:gap-4 mb-4">
               <div className="p-3 bg-accent/10 rounded-lg">
                 <Mail className="w-6 h-6 text-accent" />
               </div>
@@ -34,7 +35,7 @@ export default function CustomerCarePage() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
                   Email
                 </p>
-                <p className="text-xl font-light">support@yourjewellery.com</p>
+                <p className="text-[18px] font-light">support@yourjewellery.com</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -43,8 +44,8 @@ export default function CustomerCarePage() {
           </div>
 
           {/* Phone Card */}
-          <div className="bg-card border border-border rounded-lg p-8 hover:shadow-md transition-shadow">
-            <div className="flex items-start gap-4 mb-4">
+          <div className="bg-card border border-border rounded-lg lg:p-8 md:p-6 p-4 hover:shadow-md transition-shadow">
+            <div className="flex items-start gap-2 md:gap-4 mb-4">
               <div className="p-3 bg-accent/10 rounded-lg">
                 <Phone className="w-6 h-6 text-accent" />
               </div>
@@ -52,7 +53,7 @@ export default function CustomerCarePage() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
                   Phone
                 </p>
-                <p className="text-xl font-light">+91 7494825586</p>
+                <p className="text-[18px] font-light">+91 7494825586</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -61,8 +62,8 @@ export default function CustomerCarePage() {
           </div>
 
           {/* Hours Card */}
-          <div className="bg-card border border-border rounded-lg p-8 hover:shadow-md transition-shadow">
-            <div className="flex items-start gap-4 mb-4">
+          <div className="bg-card border border-border rounded-lg lg:p-8 md:p-6 p-4 hover:shadow-md transition-shadow">
+            <div className="flex items-start gap-2 md:gap-4 mb-4">
               <div className="p-3 bg-accent/10 rounded-lg">
                 <Clock className="w-6 h-6 text-accent" />
               </div>
@@ -70,7 +71,7 @@ export default function CustomerCarePage() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
                   Business Hours
                 </p>
-                <p className="text-xl font-light">10 AM – 7 PM IST</p>
+                <p className="text-[18px] font-light">10 AM – 7 PM IST</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -79,8 +80,8 @@ export default function CustomerCarePage() {
           </div>
 
           {/* Location Card */}
-          <div className="bg-card border border-border rounded-lg p-8 hover:shadow-md transition-shadow">
-            <div className="flex items-start gap-4 mb-4">
+          <div className="bg-card border border-border rounded-lg lg:p-8 md:p-6 p-4 hover:shadow-md transition-shadow">
+            <div className="flex items-start gap-2 md:gap-4 mb-4">
               <div className="p-3 bg-accent/10 rounded-lg">
                 <MapPin className="w-6 h-6 text-accent" />
               </div>
@@ -88,7 +89,7 @@ export default function CustomerCarePage() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
                   Visit Us
                 </p>
-                <p className="text-xl font-light">Bhiwani, Haryana</p>
+                <p className="text-[18px] font-light">Bhiwani, Haryana</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -98,7 +99,7 @@ export default function CustomerCarePage() {
         </div>
 
         {/* Detailed Location Section */}
-        <div className="bg-gradient-to-br from-muted/40 to-muted/20 border border-border rounded-lg p-8 sm:p-12 mb-12">
+        <div className="bg-gradient-to-br from-muted/40 to-muted/20 border border-border rounded-lg md:p-8 p-4 sm:p-12 mb-12">
           <h2 className="text-2xl font-light mb-8 tracking-tight">Shop Location</h2>
           <div className="space-y-4">
             <div className="flex gap-4">
@@ -120,9 +121,9 @@ export default function CustomerCarePage() {
             Each piece in our collection is crafted with precision and passion. 
             Let us help you find your perfect jewel.
           </p>
-          <button className="px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-light tracking-wide">
+          <Button className={"uppercase"}>
             Send Inquiry
-          </button>
+          </Button>
         </div>
       </div>
     </div>
