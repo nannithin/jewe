@@ -21,10 +21,12 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from '@/components/ui/carousel'
+import { useRouter } from "next/navigation";
 
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
@@ -176,6 +178,9 @@ export default function Home() {
                 <CarouselItem
                   key={ind}
                   className="pl-4 basis-1/2 lg:basis-1/5"
+                  onClick={() => {
+                    router.push(`/item?search=${item}`)
+                  }}
                 >
                   <div className="flex flex-col items-center gap-4">
                     <div className="h-36 w-36 rounded-full border overflow-hidden">
