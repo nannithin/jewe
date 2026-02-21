@@ -31,7 +31,7 @@ export default function ProductForm() {
     category: '',
     gemstone: '',
     material: '',
-    sizes: [] ,
+    sizes: [],
     adjustableChain: false,
     additionalInfo: '',
   });
@@ -161,7 +161,19 @@ export default function ProductForm() {
                     className="border-amber-200 focus:border-amber-500"
                   />
                 </div>
-
+                <div className="space-y-2">
+                  <Label htmlFor="title" className="text-amber-900 font-medium">
+                    Image *
+                  </Label>
+                  <Input
+                    id="image"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageChange(e)}
+                    required
+                    className="border-amber-200 focus:border-amber-500 cursor-pointer"
+                  />
+                </div>
                 <div className="space-y-2">
                   <Label htmlFor="category" className="text-amber-900 font-medium">
                     Category *
@@ -276,7 +288,7 @@ export default function ProductForm() {
                   <Label htmlFor="currency" className="text-amber-900 font-medium">
                     Currency
                   </Label>
-                  
+
                 </div>
 
                 <div className="space-y-2">
