@@ -130,7 +130,7 @@ export default function Home() {
             <CarouselItem className="basis-full md:basis-1/3">
               <div className="relative">
                 <Image src={catering} alt="bg" className="w-full h-auto" />
-                <div className="absolute top-0 left-0 p-6 space-y-2">
+                <div className="absolute top-0 left-0 p-6 space-y-2 text-white">
                   <p className="text-sm">NEW COLLECTION</p>
                   <p className="text-xl max-w-[60%]">
                     Jewellery & Charm Rings
@@ -237,7 +237,6 @@ export default function Home() {
       <div id="about" className="w-full bg-[#FCF9F1] ">
         <div className="md:grid grid-cols-2 md:px-10 md:py-20">
           <div className="bg-white">
-
           </div>
           <div className="flex flex-col items-center p-5 space-y-5 ">
             <h1 className="text-2xl text-center">Shop History</h1>
@@ -246,7 +245,6 @@ export default function Home() {
               <p> On even feet time have an no at. Relation so in confined smallest children unpacked delicate. Why sir end believe uncivil respect. Always get adieus nature day course for common. My little garret repair to desire he esteem.</p>
               <p> Improve ashamed married expense bed her comfort pursuit mrs.</p>
             </div>
-            <Button variant="outline" className={"border-[#B5947C] text-[#B5947C]"}>READ MORE</Button>
           </div>
         </div>
         <div id="reviews" className="p-5 space-y-5">
