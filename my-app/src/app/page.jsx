@@ -22,7 +22,8 @@ import {
   CarouselNext,
 } from '@/components/ui/carousel'
 import { useRouter } from "next/navigation";
-
+import catering from '../../public/catering.jpg'
+import catebrace from '../../public/catbrace.jpg'
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -116,7 +117,7 @@ export default function Home() {
                 <div className="absolute top-0 left-0 p-6 space-y-2">
                   <p className="text-sm">FLAT DISCOUNT</p>
                   <p className="text-xl max-w-[60%]">
-                    Necklaces & Body Jewels
+                    Just Lunched Desk the halls
                   </p>
                   <a href="#collections" className="uppercase border-b text-sm border-black">
                     Shop now
@@ -128,11 +129,11 @@ export default function Home() {
             {/* ITEM 2 */}
             <CarouselItem className="basis-full md:basis-1/3">
               <div className="relative">
-                <Image src={bgimg} alt="bg" className="w-full h-auto" />
+                <Image src={catering} alt="bg" className="w-full h-auto" />
                 <div className="absolute top-0 left-0 p-6 space-y-2">
-                  <p className="text-sm">FLAT DISCOUNT</p>
+                  <p className="text-sm">NEW COLLECTION</p>
                   <p className="text-xl max-w-[60%]">
-                    Necklaces & Body Jewels
+                    Jewellery & Charm Rings
                   </p>
                   <a className="uppercase border-b text-sm border-black">
                     Shop now
@@ -144,7 +145,7 @@ export default function Home() {
             {/* ITEM 3 */}
             <CarouselItem className="basis-full md:basis-1/3">
               <div className="relative">
-                <Image src={bgimg} alt="bg" className="w-full h-auto" />
+                <Image src={catebrace} alt="bg" className="w-full h-auto" />
                 <div className="absolute top-0 left-0 p-6 space-y-2">
                   <p className="text-sm">FLAT DISCOUNT</p>
                   <p className="text-xl max-w-[60%]">
