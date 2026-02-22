@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useStore from "@/store/useStore";
 import { ChevronRight, Heart, Minus, Plus } from "lucide-react";
+import Image from "next/image";
 import { showToast } from "nextjs-toast-notify";
 import React, { useEffect, useState } from "react";
 
@@ -54,7 +55,9 @@ export default function Item({ params }) {
       </div>
 
       <div className="space-y-5">
-        <div className="w-full aspect-square bg-accent"></div>
+        <div className="w-full aspect-square bg-accent">
+          <Image src={product?.image} alt={product?.title} className="w-full aspect-square object-cover" />
+        </div>
 
         <div className="space-y-3">
           <h1 className="tracking-wide text-xl">{product.title}</h1>

@@ -25,7 +25,7 @@ const ItemCard = ({ product }) => {
                 <div className="relative z-10 h-32 w-32 md:h-40 md:w-40 bg-[#F6F6F6]">
                     <Image
                         className="object-fill"
-                        src={product.images?.[0]?.url || necklace}
+                        src={product?.image}
                         alt={product.title}
                         fill
                     />
