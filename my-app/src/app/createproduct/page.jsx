@@ -120,11 +120,9 @@ export default function ProductForm() {
         image: imageUrl, // 👈 add image URL here
       };
 
-      const response = await api.post('/api/products', payload);
+      const response = await api.post('/products', payload);
 
-      // ⚠️ If you're using axios, remove response.ok check
-      // axios throws automatically on error
-
+     
       setSuccess(true);
 
       // Reset
