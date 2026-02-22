@@ -50,6 +50,7 @@ router.post("/create", protect, async (req, res) => {
       item.product.stockQuantity -= item.qty;
       await item.product.save();
     }
+    console.log("Formatted Items:", formattedItems);
 
     // 🔥 Step 3 — Create order
     const newOrder = await Order.create({
