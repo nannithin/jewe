@@ -9,6 +9,7 @@ import useStore from "@/store/useStore";
 
 export default function AdminPayments() {
   const [orders, setOrders] = useState([]);
+  const [load,setLoad] = useState(true)
   const user = useStore((state) => state.user);
   const [search, setSearch] = useState("");
   const router = useRouter();
@@ -18,9 +19,24 @@ export default function AdminPayments() {
   };
 
   useEffect(() => {
-    if(!user) return router.push('/')
-    if(user.role != 'admin') return router.push('/')
-  },[user,router])
+    const checkAdmin = async () => {
+      try {
+        const res = await api.get("/auth/me");
+
+        if (res.data.user.role !== "admin") {
+          setLoad(false)
+          router.push("/");
+        }
+      } catch (error) {
+        setLoad(false)
+        router.push("/login");
+      } finally{
+        setLoad(false)
+      }
+    };
+
+    checkAdmin();
+  }, []);
 
   useEffect(() => {
     fetchOrders();
@@ -41,7 +57,7 @@ export default function AdminPayments() {
     order.paymentDetails?.transactionId?.toLowerCase().includes(search.toLowerCase())
   );
 
-  if(!user || user.role != 'admin') return <p>Loadin...</p>
+  if (load) return <p>Loadin...</p>
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 p-8">

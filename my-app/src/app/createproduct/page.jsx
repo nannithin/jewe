@@ -47,15 +47,24 @@ export default function ProductForm() {
   const [newSize, setNewSize] = useState('');
 
   useEffect(() => {
-    if (!user) {
-      router.push("/");
-      return;
-    }
+    const checkAdmin = async () => {
+      try {
+        const res = await api.get("/auth/me");
 
-    if (user.role !== "admin") {
-      router.push("/");
-    }
-  },[user,router])
+        if (res.data.user.role !== "admin") {
+          setLoading(false)
+          router.push("/");
+        }
+      } catch (error) {
+        setLoading(false)
+        router.push("/login");
+      } finally{
+        setLoading(false)
+      }
+    };
+
+    checkAdmin();
+  }, []);
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({
@@ -85,7 +94,7 @@ export default function ProductForm() {
 
   const handleImageChange = (e) => {
     console.log(e);
-    
+
     const file = e.target.files[0];
     if (!file) return;
 
@@ -169,8 +178,8 @@ export default function ProductForm() {
 
   };
 
-  if(user == null || user.role != 'admin') return <p>Loading...</p>
-  
+  if (loading) return <p>Loading...</p>
+
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
       <Card className="border-0 shadow-lg">
