@@ -56,8 +56,10 @@ export default function ProductForm() {
           router.push("/");
         }
       } catch (error) {
+        console.log(error);
+        
         setLoading(false)
-        router.push("/login");
+        //router.push("/auth/login");
       } finally{
         setLoading(false)
       }
