@@ -8,22 +8,33 @@ router.post("/register", register);
 router.post("/login", login);
 
 router.get("/me", protect, async (req, res) => {
-  try {
-    
-    const user = await User.findById(req.user.id).select("-password");
+    try {
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+        const user = await User.findById(req.user.id).select("-password");
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json({
+            user,
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
     }
+});
 
-    res.json({
-      user,
+router.post("/logout", (req, res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",     // use "lax" if frontend + backend same domain
     });
 
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
+    res.json({ message: "Logged out successfully" });
 });
 
 

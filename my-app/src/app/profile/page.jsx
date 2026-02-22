@@ -13,6 +13,16 @@ export default function () {
     const router = useRouter()
     const { user, logout } = useStore();
 
+    const handleLogout = async () => {
+        try {
+            await api.post("/auth/logout");
+            logout(); // reset Zustand
+            router.push("/");
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -71,7 +81,7 @@ export default function () {
                 <p>Terms & Conditions</p>
                 <ChevronRight />
             </div>
-            <Button className={"h-11 w-full my-3"}>Logout</Button>
+            <Button onClick={handleLogout} className={"h-11 w-full my-3"}>Logout</Button>
         </div>
     )
 }
