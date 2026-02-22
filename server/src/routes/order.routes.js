@@ -1,7 +1,7 @@
 import express from "express";
 import { protect } from "../middleware.js";
 import Order from "../models/order.model.js";
-import ProductModel from "../models/product.model.js";
+import Product from "../models/product.model.js";
 
 const router = express.Router();
 
@@ -19,7 +19,7 @@ router.post("/create", protect, async (req, res) => {
 
     // 🔥 Step 1 — Validate everything first
     for (const item of items) {
-      const product = await ProductModel.findById(item._id);
+      const product = await Product.findById(item._id);
 
       if (!product) {
         return res.status(404).json({ message: "Product not found" });
@@ -151,7 +151,7 @@ router.put("/admin/approve/:id", protect, async (req, res) => {
 
     // 🔥 Reduce stock here (safer location)
     for (const item of order.items) {
-      const product = await ProductModel.findById(item.productId);
+      const product = await Product.findById(item.productId);
 
       if (!product) {
         return res.status(404).json({ message: "Product not found" });
