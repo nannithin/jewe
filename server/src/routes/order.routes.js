@@ -1,6 +1,7 @@
 import express from "express";
 import { protect } from "../middleware.js";
 import Order from "../models/order.model.js";
+import Product from "../models/product.model.js";
 
 const router = express.Router();
 
@@ -12,14 +13,48 @@ router.post("/create", protect, async (req, res) => {
       return res.status(400).json({ message: "Cart is empty" });
     }
 
-    const totalAmount = items.reduce(
-      (sum, item) => sum + item.price * item.qty,
-      0
-    );
+    let totalAmount = 0;
+    const formattedItems = [];
+    const productsToUpdate = [];
 
+    // 🔥 Step 1 — Validate everything first
+    for (const item of items) {
+      const product = await Product.findById(item._id);
+
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
+      if (product.stockQuantity < item.qty) {
+        return res.status(400).json({ message: `${product.title} is out of stock` });
+      }
+
+      totalAmount += product.price * item.qty;
+
+      formattedItems.push({
+        productId: product._id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        qty: item.qty,
+      });
+
+      productsToUpdate.push({
+        product,
+        qty: item.qty,
+      });
+    }
+
+    // 🔥 Step 2 — Reduce stock safely
+    for (const item of productsToUpdate) {
+      item.product.stockQuantity -= item.qty;
+      await item.product.save();
+    }
+
+    // 🔥 Step 3 — Create order
     const newOrder = await Order.create({
-      user: req.user.id, // from JWT
-      items,
+      user: req.user.id,
+      items: formattedItems,
       shippingAddress,
       totalAmount,
     });
@@ -28,6 +63,7 @@ router.post("/create", protect, async (req, res) => {
       message: "Order created successfully",
       order: newOrder,
     });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
