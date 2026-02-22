@@ -13,7 +13,6 @@ export default function OrdersPage() {
       try {
         const res = await api.get("/orders/userorders");
         console.log(res);
-        
         setOrders(res.data);
       } catch (err) {
         console.log(err);

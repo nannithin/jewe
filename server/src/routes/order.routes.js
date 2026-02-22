@@ -34,6 +34,18 @@ router.post("/create", protect, async (req, res) => {
   }
 });
 
+router.get('/userorders', protect, async (req, res) => {
+  console.log(req.user.id);
+  try {
+    const orders = await Order.find({ user: req.user.id })
+      .sort({ createdAt: -1 });
+    return res.json(orders);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+})
+
 
 
 router.get("/:id", protect, async (req, res) => {
@@ -115,17 +127,7 @@ router.get("/admin/pending-payments", async (req, res) => {
   res.json({ orders });
 });
 
-router.get('/userorders', protect, async (req, res) => {
-  console.log(req.user.id);
 
-  try {
-    const orders = await Order.find({ user: req.user.id })
-      .sort({ createdAt: -1 });
-    return res.json(orders);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-})
 
 
 export default router;
