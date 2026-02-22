@@ -12,9 +12,7 @@ import { useEffect } from "react";
 export default function () {
     const router = useRouter()
     const {user,logout} = useStore();
-    const loggedinuser = user?.user;
-    console.log("lo"+loggedinuser);
-    console.log("us"+user);
+  
     
     
     useEffect(() => {
@@ -40,8 +38,8 @@ export default function () {
             <div className="flex items-center gap-5">
                 <div className="w-28 h-28 rounded-full bg-accent"></div>
                 <div className="space-y-1">
-                    <h1 className="font-medium">{loggedinuser?.name}</h1>
-                    <p>{loggedinuser?.email}</p>
+                    <h1 className="font-medium">{user?.name}</h1>
+                    <p>{user?.email}</p>
                 </div>
             </div>
             <Link href={"/profile/orders"} className="flex items-center justify-between py-3 border-b">
