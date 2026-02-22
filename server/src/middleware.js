@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken"
 
 export const protect = (req, res, next) => {
   const token = req.cookies.token
-  console.log(token);
   
   if (!token) {
     return res.status(401).json({ message: "Not authenticated" })
@@ -10,9 +9,7 @@ export const protect = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    req.user = decoded // { id, email }   
-    console.log(req.user);
-     
+    req.user = decoded // { id, email }        
     next()
   } catch (error) {    
     return res.status(401).json({ message: "Invalid token" })
