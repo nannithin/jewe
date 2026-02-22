@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -11,6 +11,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Plus, Trash2, Loader2 } from 'lucide-react';
 import api from '@/lib/axios';
 import { supabase } from '@/lib/supabse';
+import useStore from '@/store/useStore';
+import { useRouter } from 'next/navigation';
 
 const CATEGORIES = ['pendant', 'ring', 'earring', 'necklace', 'bracelet'];
 const MATERIALS = ['Gold', 'Silver', 'Platinum', 'Rose Gold', 'White Gold'];
@@ -19,6 +21,8 @@ const GEMSTONES = ['Diamond', 'Emerald', 'Ruby', 'Sapphire', 'Pearl', 'Topaz', '
 
 
 export default function ProductForm() {
+  const user = useStore((state) => state.user);
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -41,6 +45,17 @@ export default function ProductForm() {
 
   const [sizes, setSizes] = useState([]);
   const [newSize, setNewSize] = useState('');
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+      return;
+    }
+
+    if (user.role !== "admin") {
+      router.push("/");
+    }
+  },[user,router])
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({
@@ -151,8 +166,11 @@ export default function ProductForm() {
     } finally {
       setLoading(false);
     }
+
   };
 
+  if(user == null || user.role != 'admin') return <p>Loading...</p>
+  
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
       <Card className="border-0 shadow-lg">

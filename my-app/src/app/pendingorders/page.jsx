@@ -4,15 +4,23 @@ import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import useStore from "@/store/useStore";
 
 export default function AdminPayments() {
   const [orders, setOrders] = useState([]);
+  const user = useStore((state) => state.user);
   const [search, setSearch] = useState("");
-
+  const router = useRouter();
   const fetchOrders = async () => {
     const res = await api.get("/orders/admin/pending-payments");
     setOrders(res.data.orders);
   };
+
+  useEffect(() => {
+    if(!user) return router.push('/')
+    if(user.role != 'admin') return router.push('/')
+  },[user,router])
 
   useEffect(() => {
     fetchOrders();
@@ -32,6 +40,8 @@ export default function AdminPayments() {
     order._id.toLowerCase().includes(search.toLowerCase()) ||
     order.paymentDetails?.transactionId?.toLowerCase().includes(search.toLowerCase())
   );
+
+  if(!user || user.role != 'admin') return <p>Loadin...</p>
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 p-8">

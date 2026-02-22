@@ -28,7 +28,7 @@ export default function OrderCard({ order }) {
         <div className="flex flex-wrap gap-3 pt-2">
           <div className="flex items-center gap-2">
             <span className="text-sm">Payment:</span>
-            <span className="px-3 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">
+            <span className={`px-3 py-1 text-xs rounded-full ${order.paymentStatus === 'pain' ? "bg-emerald-100 text-emerald-600" : "bg-yellow-100 text-yellow-700"} `}>
               {order.paymentStatus}
             </span>
           </div>

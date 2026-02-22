@@ -11,27 +11,26 @@ import { useEffect } from "react";
 
 export default function () {
     const router = useRouter()
-    const {user,logout} = useStore();
-  
-    
-    
-    useEffect(() => {
-    const checkAuth = async () => {
-        try {
-            const res = await api.get("/products/dashboard");
+    const { user, logout } = useStore();
 
-            if (res.status === 200) {
-                router.push("/profile");
-            } else {
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const res = await api.get("/products/dashboard");
+
+                if (res.status === 200) {
+                    router.push("/profile");
+                } else {
+                    router.push("/auth/login");
+                }
+            } catch (error) {
                 router.push("/auth/login");
             }
-        } catch (error) {
-            router.push("/auth/login");
-        }
-    };
+        };
 
-    checkAuth();
-}, []);
+        checkAuth();
+    }, []);
 
     return (
         <div className="w-full p-12 px-5 space-y-5">
@@ -42,6 +41,20 @@ export default function () {
                     <p>{user?.email}</p>
                 </div>
             </div>
+            {
+                user?.role == 'admin' &&
+                <>
+                    <Link href={"/createproduct"} className="flex items-center justify-between py-3 border-b">
+                        <p>Add Product</p>
+                        <ChevronRight />
+                    </Link>
+                    <Link href={"/pendingorders"} className="flex items-center justify-between py-3 border-b">
+                        <p>Pending Orders</p>
+                        <ChevronRight />
+                    </Link>
+                </>
+            }
+
             <Link href={"/profile/orders"} className="flex items-center justify-between py-3 border-b">
                 <p>Orders</p>
                 <ChevronRight />
