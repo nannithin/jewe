@@ -180,7 +180,7 @@ export default function Cart() {
                             <Input
                                 type="text"
                                 value={address.area}
-                                onChange />
+                                onChange={(e) => handleAddressChange("area", e.target.value)} />
                         </div>
                         <div className="space-y-1 font-medium">
                             <p>Flat no / Building Name <span className="text-orange-500">*</span></p>
