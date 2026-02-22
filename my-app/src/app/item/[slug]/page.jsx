@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 export default function Item({ params }) {
   const [showAdditional, setShowAdditional] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState(null)
 
   const { wishlist, addToWishlist, removeFromWishlist, addToCart, increaseQty, decreaseQty } = useStore();
   // Next.js 15 (client component)
@@ -42,7 +43,7 @@ export default function Item({ params }) {
 
   if (!product) return <p className="p-5">Loading...</p>;
   console.log(product);
-  
+
 
   return (
     <div className="w-full pb-32 px-5 space-y-5">
@@ -75,7 +76,35 @@ export default function Item({ params }) {
               <p className="text-[17px]">Size</p>
               <p className="text-xs text-[#B5947C]">SIZE GUIDE</p>
             </div>
-            <Input type="text" />
+            <div className="grid grid-cols-4 gap-3">
+              {product.sizes.map((size) => (
+                <button
+                  key={size.label}
+                  onClick={() => setSelectedSize(size.label)}
+                  disabled={!size.available}
+                  className={`
+                  py-3 px-2 rounded-lg font-medium text-sm transition-all duration-200
+                  ${selectedSize === size.label
+                      ? 'bg-gray-900 text-white border-2 border-gray-900'
+                      : 'bg-gray-100 text-gray-900 border-2 border-gray-200 hover:border-gray-300'
+                    }
+                  ${!size.available
+                      ? 'opacity-40 cursor-not-allowed line-through'
+                      : 'cursor-pointer'
+                    }
+                `}
+                >
+                  {size.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Selected Size Info */}
+            {selectedSize && (
+              <p className="text-sm text-gray-600 pt-2">
+                Selected size: <span className="font-medium text-gray-900">{selectedSize}</span>
+              </p>
+            )}
           </div>
 
           <div className="flex items-center gap-5">
