@@ -10,7 +10,18 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
+
+
 export default function Cart() {
+    const [address, setAddress] = useState({
+        name: "",
+        pincode: "",
+        city: "",
+        state: "",
+        area: "",
+        flat: "",
+        country: "",
+    });
     const [addOpen, setAddOpen] = useState(false);
     const { cart, removeFromCart, increaseQty, decreaseQty } = useStore();
     const router = useRouter();
@@ -18,6 +29,12 @@ export default function Cart() {
         (sum, item) => sum + item.price * item.qty,
         0
     );
+    const handleAddressChange = (field, value) => {
+        setAddress((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
     return (
         <div className="w-full pb-32 px-5 space-y-5">
             <div className="flex items-center gap-1 list-none text-[15px] pt-3">
@@ -68,7 +85,8 @@ export default function Cart() {
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             e.preventDefault();
-                                            decreaseQty(item._id)}
+                                            decreaseQty(item._id)
+                                        }
                                         }
                                     />
                                     {item.qty}
@@ -125,31 +143,60 @@ export default function Cart() {
 
                         <div className="space-y-1 font-medium">
                             <p>Name <span className="text-orange-500">*</span></p>
-                            <Input type={"text"} />
+                            <Input
+                                type="text"
+                                value={address.name}
+                                onChange={(e) => handleAddressChange("name", e.target.value)}
+                            />
                         </div>
                         <div className="space-y-1 font-medium">
                             <p>Pincode <span className="text-orange-500">*</span></p>
-                            <Input type={"text"} />
+                            <Input
+                                type="text"
+                                value={address.pincode}
+                                onChange={(e) => handleAddressChange("pincode", e.target.value)}
+                            />
                         </div>
                         <div className="space-y-1 font-medium">
                             <p>City <span className="text-orange-500">*</span></p>
-                            <Input type={"text"} />
+                            <Input
+                                type="text"
+                                value={address.city}
+                                onChange={(e) => handleAddressChange("city", e.target.value)}
+                            />
+
                         </div>
                         <div className="space-y-1 font-medium">
                             <p>State <span className="text-orange-500">*</span></p>
-                            <Input type={"text"} />
+                            <Input
+                                type="text"
+                                value={address.state}
+                                onChange={(e) => handleAddressChange("state", e.target.value)}
+                            />
+
                         </div>
                         <div className="space-y-1 font-medium">
                             <p>Locality / Area <span className="text-orange-500">*</span></p>
-                            <Input type={"text"} />
+                            <Input
+                                type="text"
+                                value={address.area}
+                                onChange />
                         </div>
                         <div className="space-y-1 font-medium">
                             <p>Flat no / Building Name <span className="text-orange-500">*</span></p>
-                            <Input type={"text"} />
+                            <Input
+                                type="text"
+                                value={address.flat}
+                                onChange={(e) => handleAddressChange("flat", e.target.value)}
+                            />
                         </div>
                         <div className="space-y-1 font-medium">
                             <p>Country <span className="text-orange-500">*</span></p>
-                            <Input type={"text"} />
+                            <Input
+                                type="text"
+                                value={address.country}
+                                onChange={(e) => handleAddressChange("country", e.target.value)}
+                            />
                         </div>
                     </div>
                     <div className="pb-4 font-medium border-b flex justify-between items-center">
@@ -165,14 +212,15 @@ export default function Cart() {
                         alert("Cart is empty");
                         return;
                     }
-
+                    if (!address.name || !address.city || !address.pincode) {
+                        alert("Please fill required address fields");
+                        return;
+                    }
                     try {
-                        const res = await api.post("/orders/create", JSON.stringify({
+                        const res = await api.post("/orders/create", {
                             items: cart,
-                            shippingAddress: {
-                                name: "Temp Name", // later connect inputs
-                            },
-                        }))
+                            shippingAddress: address,
+                        });
 
                         if (res.status === 401) {
                             router.push("/login");
