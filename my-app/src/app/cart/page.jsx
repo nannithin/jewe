@@ -38,7 +38,7 @@ export default function Cart() {
                         key={item._id}
                         className="py-5 border-b flex justify-between items-start gap-5"
                     >
-                        <div className="w-24 h-24 aspect-square bg-accent"><Image className={"w-full h-full aspect-square"} href={item?.image} /></div>
+                        <div className="w-24 h-24 aspect-square bg-accent"><Image className={"w-full h-full aspect-square"} src={item?.image} /></div>
 
                         <div className="space-y-3 flex-1">
                             <div className="flex justify-between">
