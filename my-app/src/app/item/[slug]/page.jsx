@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import useStore from "@/store/useStore";
 import { ChevronRight, Heart, Minus, Plus } from "lucide-react";
 import { showToast } from "nextjs-toast-notify";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Item({ params }) {
   const [showAdditional, setShowAdditional] = useState(false);
@@ -17,7 +17,7 @@ export default function Item({ params }) {
 
   const [product, setProduct] = useState(null);
 
-  useState(() => {
+  useEffect(() => {
     const fetchProduct = async () => {
       const res = await fetch(
         `https://jewe-2w4e.onrender.com/api/products/${slug}`
@@ -41,6 +41,8 @@ export default function Item({ params }) {
 
 
   if (!product) return <p className="p-5">Loading...</p>;
+  console.log(product);
+  
 
   return (
     <div className="w-full pb-32 px-5 space-y-5">
