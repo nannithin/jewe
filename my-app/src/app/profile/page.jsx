@@ -13,8 +13,8 @@ export default function () {
     const router = useRouter()
     const {user,logout} = useStore();
     const loggedinuser = user?.user;
-    console.log(loggedinuser);
-    console.log(user);
+    console.log("lo"+loggedinuser);
+    console.log("us"+user);
     
     
     useEffect(() => {
