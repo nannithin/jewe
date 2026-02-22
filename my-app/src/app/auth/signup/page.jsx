@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import api from "@/lib/axios";
+import useStore from "@/store/useStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -26,7 +27,7 @@ export default function () {
   };
 
   // submit handler
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (user.password !== user.cpassword) {
@@ -42,6 +43,8 @@ export default function () {
       });
 
       console.log(res.data);
+      const setUser = useStore.getState().setUser;
+      setUser(res.data);
       router.push('/')
     } catch (error) {
       console.error(error.response?.data?.message);
@@ -113,7 +116,7 @@ export default function () {
 
         <p className="my-3">
           Already have an account ?{" "}
-          <Link href={"/auth/login"}><span  className="text-[#B5947C] font-medium cursor-pointer">Login</span></Link>
+          <Link href={"/auth/login"}><span className="text-[#B5947C] font-medium cursor-pointer">Login</span></Link>
         </p>
       </form>
     </div>

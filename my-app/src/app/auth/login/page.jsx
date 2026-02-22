@@ -3,12 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import api from "@/lib/axios";
+import useStore from "@/store/useStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function () {
-  const [user, setUser] = useState({
+  const [user, setUserr] = useState({
     email: "",
     password: "",
   });
@@ -16,14 +17,14 @@ export default function () {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser((prev) => ({
+    setUserr((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
   try {
     const res = await api.post("/auth/login", {
@@ -33,14 +34,17 @@ export default function () {
 
     const { token, user: loggedUser } = res.data;
 
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(loggedUser));
+    // Save token separately
 
-    router.push("/")
+    // Save user in Zustand (auto persisted)
+    const setUser = useStore.getState().setUser;
+    setUser(loggedUser);
+
+    router.push("/");
   } catch (error) {
     alert(error.response?.data?.message || "Invalid credentials");
   }
-  };
+};
 
   return (
     <div className="w-full md:max-w-md md:mx-auto p-12 px-5">
