@@ -44,17 +44,17 @@ const productSchema = new mongoose.Schema(
     },
 
     gemstone: {
-      type: String, // Emerald, Diamond, Ruby
+      type: String,
     },
 
     material: {
-      type: String, // Gold, Silver, Platinum
+      type: String,
     },
 
     // Size / Variants
     sizes: [
       {
-        label: String,   // Small, Medium, Large or 16in, 18in
+        label: String,
         available: {
           type: Boolean,
           default: true,
@@ -67,26 +67,21 @@ const productSchema = new mongoose.Schema(
       default: false,
     },
 
-    // Images
-    images: [
-      {
-        url: String,
-        publicId: String,
-      },
-    ],
+    // ✅ Single Image (Supabase URL)
+    image: {
+      type: String,
+      required: true,
+    },
 
-    // Extra info (your "additional info" section)
     additionalInfo: {
       type: String,
     },
 
-    // SEO friendly
     slug: {
       type: String,
       unique: true,
     },
 
-    // Admin reference
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

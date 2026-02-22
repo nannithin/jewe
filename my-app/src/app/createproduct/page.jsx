@@ -9,6 +9,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Plus, Trash2, Loader2 } from 'lucide-react';
+import api from '@/lib/axios';
+import { supabase } from '@/lib/supabse';
 
 const CATEGORIES = ['pendant', 'ring', 'earring', 'necklace', 'bracelet'];
 const MATERIALS = ['Gold', 'Silver', 'Platinum', 'Rose Gold', 'White Gold'];
@@ -20,7 +22,8 @@ export default function ProductForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
-
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -65,6 +68,21 @@ export default function ProductForm() {
     );
   };
 
+  const handleImageChange = (e) => {
+    console.log(e);
+    
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      setError("Image must be less than 2MB");
+      return;
+    }
+
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -72,28 +90,44 @@ export default function ProductForm() {
     setSuccess(false);
 
     try {
+      let imageUrl = '';
+
+      // 🔥 1. Upload Image to Supabase First
+      if (imageFile) {
+        const filePath = `products/${Date.now()}-${imageFile.name}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('jewe')
+          .upload(filePath, imageFile);
+
+        if (uploadError) {
+          throw new Error(uploadError.message);
+        }
+
+        const { data } = supabase.storage
+          .from('jewe')
+          .getPublicUrl(filePath);
+
+        imageUrl = data.publicUrl;
+      }
+
+      // 🔥 2. Create Payload
       const payload = {
         ...formData,
         price: parseFloat(formData.price),
         stockQuantity: parseInt(formData.stockQuantity),
         sizes: sizes,
+        image: imageUrl, // 👈 add image URL here
       };
 
-      const response = await fetch('/api/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await api.post('/api/products', payload);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to create product');
-      }
+      // ⚠️ If you're using axios, remove response.ok check
+      // axios throws automatically on error
 
       setSuccess(true);
-      // Reset form
+
+      // Reset
       setFormData({
         title: '',
         description: '',
@@ -108,10 +142,15 @@ export default function ProductForm() {
         adjustableChain: false,
         additionalInfo: '',
       });
+
       setSizes([]);
+      setImageFile(null);
+      setImagePreview(null);
+
       setTimeout(() => setSuccess(false), 3000);
+
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err.message || 'An error occurred');
     } finally {
       setLoading(false);
     }
@@ -173,6 +212,13 @@ export default function ProductForm() {
                     required
                     className="border-amber-200 focus:border-amber-500 cursor-pointer"
                   />
+                  {imagePreview && (
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      className="w-40 h-40 object-cover rounded-lg border"
+                    />
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="category" className="text-amber-900 font-medium">
