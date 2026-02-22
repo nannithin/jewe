@@ -13,6 +13,10 @@ export default function () {
     const router = useRouter()
     const {user,logout} = useStore();
     const loggedinuser = user?.user;
+    console.log(loggedinuser);
+    console.log(user);
+    
+    
     useEffect(() => {
     const checkAuth = async () => {
         try {
