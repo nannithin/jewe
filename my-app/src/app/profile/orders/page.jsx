@@ -11,8 +11,10 @@ export default function OrdersPage() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await api.get("/orders/my-orders");
-        setOrders(res.data.orders);
+        const res = await api.get("/orders/userorders");
+        console.log(res);
+        
+        setOrders(res.data);
       } catch (err) {
         console.log(err);
       }
