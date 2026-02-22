@@ -183,7 +183,7 @@ export default function ProductForm() {
   if (loading) return <p>Loading...</p>
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
+    <div className="w-full max-w-4xl mx-auto p-4 pb-20">
       <Card className="border-0 shadow-lg">
         <CardHeader className="bg-gradient-to-r from-amber-50 to-orange-50 border-b">
           <CardTitle className="text-3xl text-amber-900">Create New Jewellery</CardTitle>

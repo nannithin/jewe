@@ -60,7 +60,7 @@ export default function AdminPayments() {
   if (load) return <p>Loadin...</p>
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 p-8 pb-20">
 
       {/* Header */}
       <div className="space-y-5 mb-10">
