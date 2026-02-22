@@ -1,7 +1,7 @@
 import express from "express";
 import { protect } from "../middleware.js";
 import Order from "../models/order.model.js";
-import Product from "../models/product.model.js";
+import Product from "../models/prod.js";
 
 const router = express.Router();
 
