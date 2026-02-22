@@ -130,27 +130,82 @@ router.post("/submit-payment/:id", async (req, res) => {
 
 
 // Approve
-router.put("/admin/approve/:id", async (req, res) => {
-  const order = await Order.findById(req.params.id);
 
-  if (!order) return res.status(404).json({ message: "Order not found" });
+router.put("/admin/approve/:id", protect, async (req, res) => {
+  try {
+    // 🔐 Ensure admin
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Admin access required" });
+    }
 
-  order.paymentStatus = "paid";
-  order.orderStatus = "processing";
+    const order = await Order.findById(req.params.id);
 
-  await order.save();
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
 
-  res.json({ message: "Payment approved" });
+    if (order.paymentStatus !== "pending_verification") {
+      return res.status(400).json({ message: "Invalid payment state" });
+    }
+
+    // 🔥 Reduce stock here (safer location)
+    for (const item of order.items) {
+      const product = await Product.findById(item.productId);
+
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
+      if (product.stockQuantity < item.qty) {
+        return res.status(400).json({
+          message: `${product.title} is out of stock`,
+        });
+      }
+
+      product.stockQuantity -= item.qty;
+      await product.save();
+    }
+
+    order.paymentStatus = "paid";
+    order.orderStatus = "processing";
+
+    await order.save();
+
+    res.json({ message: "Payment approved & stock updated" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 // Reject
-router.put("/admin/reject/:id", async (req, res) => {
-  const order = await Order.findById(req.params.id);
+router.put("/admin/reject/:id", protect, async (req, res) => {
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Admin access required" });
+    }
 
-  order.paymentStatus = "rejected";
-  await order.save();
+    const order = await Order.findById(req.params.id);
 
-  res.json({ message: "Payment rejected" });
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    if (order.paymentStatus !== "pending_verification") {
+      return res.status(400).json({ message: "Invalid payment state" });
+    }
+
+    order.paymentStatus = "rejected";
+
+    await order.save();
+
+    res.json({ message: "Payment rejected" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 
