@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import { Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import OrderCard from "@/components/ordercard";
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -39,40 +40,7 @@ export default function OrdersPage() {
       ) : (
         <div className="space-y-6">
           {orders.map((order) => (
-            <div
-              key={order._id}
-              className="bg-white rounded-2xl shadow-sm p-6 border hover:shadow-md transition"
-            >
-              <div className="flex justify-between items-center mb-4">
-                <div>
-                  <p className="text-xs text-muted-foreground">Order ID</p>
-                  <p className="text-sm font-medium break-all">
-                    {order._id}
-                  </p>
-                </div>
-
-                <span className={`px-3 py-1 text-xs rounded-full font-medium
-                  ${order.paymentStatus === "paid"
-                    ? "bg-green-100 text-green-700"
-                    : "bg-yellow-100 text-yellow-700"}
-                `}>
-                  {order.paymentStatus}
-                </span>
-              </div>
-
-              <div className="text-sm space-y-2">
-                <div className="flex justify-between">
-                  <span>Total</span>
-                  <span className="font-semibold">
-                    ₹{order.totalAmount}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Status</span>
-                  <span>{order.orderStatus}</span>
-                </div>
-              </div>
-            </div>
+            <OrderCard key={order._id} order={order} />
           ))}
         </div>
       )}
