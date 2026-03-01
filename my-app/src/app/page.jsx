@@ -15,6 +15,8 @@ import necklace from "../../public/necklace.jpg"
 import rings from "../../public/rings.jpg"
 import bracel from '../../public/bracelets.jpg'
 import useEmblaCarousel from "embla-carousel-react";
+import bg2 from '../../public/solitaire_desktop_hero-banner.jpg'
+import smallbg2 from '../../public/rings_mobile_400-x-515pix_1.jpg'
 import {
   Carousel,
   CarouselContent,
@@ -25,6 +27,23 @@ import {
 import { useRouter } from "next/navigation";
 import catering from '../../public/catering.jpg'
 import catebrace from '../../public/catbrace.jpg'
+import MultiCarousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 1
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 1
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -71,43 +90,52 @@ export default function Home() {
 
   return (
     <div className="min-h-screen  space-y-8 pb-[100px]">
-      <div id="home" onClick={() => {
-        router.push(`/item?search=earnings`)
-      }} className="relative w-full aspect-4/5 md:h-[600px] cursor-pointer">
-
-        {/* Background Image */}
-        <Image
-          src={bg}
-          alt="bg"
-          fill
-          priority
-          className="object-cover max-md:hidden"
-        />
-        <Image
-          src={smallbg}
-          alt="bg"
-          fill
-          priority
-          className="object-cover md:hidden"
-        />
-
-        {/* Overlay Content */}
-        {/* <div className="absolute inset-0 flex items-center">
-          <div className="max-w-xl px-6 md:px-20 space-y-3 text-black">
-            <p className="text-xl max-md:text-sm text-muted-foreground tracking-wide">
-              A Unique, Intangible Quality.
-            </p>
-
-            <h1 className="text-2xl md:text-4xl font-normal">
-              Perfect Match for Elegant Impression
-            </h1>
-
-            <a href="#trending"><Button variant="outline" className="mt-3 border-black">
-              SHOP NOW
-            </Button></a>
+      <div
+        id="home"
+        onClick={() => router.push(`/item?search=earnings`)}
+        className="relative w-full aspect-4/5 md:h-[600px] cursor-pointer"
+      >
+        <MultiCarousel
+          responsive={responsive}
+          infinite
+          autoPlay
+          autoPlaySpeed={3000}
+          arrows={false}
+          showDots
+        >
+          <div className="relative w-full aspect-4/5 md:h-[600px]">
+            <Image
+              src={bg}
+              alt="bg"
+              fill
+              priority
+              className="object-cover max-md:hidden"
+            />
+            <Image
+              src={smallbg}
+              alt="bg"
+              fill
+              priority
+              className="object-cover md:hidden"
+            />
           </div>
-        </div> */}
 
+          <div className="relative w-full aspect-4/5 md:h-[600px]">
+            <Image
+              src={smallbg2}
+              alt="bg"
+              fill
+              className="object-cover md:hidden"
+            />
+            <Image
+              src={bg2}
+              alt="bg"
+              fill
+              priority
+              className="object-cover max-md:hidden"
+            />
+          </div>
+        </MultiCarousel>
       </div>
       <div className="w-full max-w-6xl mx-auto px-4">
         <Carousel
