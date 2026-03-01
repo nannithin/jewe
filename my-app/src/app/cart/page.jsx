@@ -206,7 +206,7 @@ export default function Cart() {
                 </div>
             </div>
             <Button
-                className="h-11 bg-black text-white w-full"
+                className="h-11  text-white w-full"
                 onClick={async () => {
                     if (cart.length === 0) {
                         alert("Cart is empty");
