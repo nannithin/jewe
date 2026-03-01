@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import earning from "../../public/earnings.jpg"
-import bg from "../../public/download.jpg"
+import bg from "../../public/earrings_desktop_hero-banner_2872-_-1266pix.jpg"
+import smallbg from '../../public/earrings_mobile_400-x-515pix.jpg'
 import bgimg from "../../public/download (1).jpg"
 import necklace from "../../public/necklace.jpg"
 import rings from "../../public/rings.jpg"
@@ -70,7 +71,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen  space-y-8 pb-[100px]">
-      <div id="home" className="relative w-full h-[270px] md:h-[600px]">
+      <div id="home" onClick={() => {
+        router.push(`/item?search=earnings`)
+      }} className="relative w-full aspect-4/5 md:h-[600px] cursor-pointer">
 
         {/* Background Image */}
         <Image
@@ -78,11 +81,18 @@ export default function Home() {
           alt="bg"
           fill
           priority
-          className="object-cover"
+          className="object-cover max-md:hidden"
+        />
+        <Image
+          src={smallbg}
+          alt="bg"
+          fill
+          priority
+          className="object-cover md:hidden"
         />
 
         {/* Overlay Content */}
-        <div className="absolute inset-0 flex items-center">
+        {/* <div className="absolute inset-0 flex items-center">
           <div className="max-w-xl px-6 md:px-20 space-y-3 text-black">
             <p className="text-xl max-md:text-sm text-muted-foreground tracking-wide">
               A Unique, Intangible Quality.
@@ -96,7 +106,7 @@ export default function Home() {
               SHOP NOW
             </Button></a>
           </div>
-        </div>
+        </div> */}
 
       </div>
       <div className="w-full max-w-6xl mx-auto px-4">
