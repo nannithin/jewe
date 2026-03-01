@@ -5,6 +5,7 @@ import { ChevronRight, X } from "lucide-react";
 import useStore from "@/store/useStore";
 import Link from "next/link";
 import { showToast } from "nextjs-toast-notify";
+import Image from "next/image";
 
 export default function Wishlist() {
   const { wishlist, removeFromWishlist, addToCart } = useStore();
@@ -35,7 +36,9 @@ export default function Wishlist() {
             className="py-5 border-b flex gap-5"
 
           >
-            <div className="w-24 h-24 aspect-square bg-accent rounded-md" />
+            <div className="w-24 h-24 aspect-square bg-accent rounded-md">
+              <Image src={item?.image} alt="item" className="w-full aspect-square"/>
+            </div>
 
             <div className="flex-1 space-y-3">
               <div className="flex justify-between items-start">

@@ -43,7 +43,7 @@ export default function () {
     }, []);
 
     return (
-        <div className="w-full p-12 px-5 space-y-5 pb-12">
+        <div className="w-full pb-12 pt-7 px-5 space-y-5">
             <div className="flex items-center gap-5">
                 <div className="w-28 h-28 rounded-full bg-accent"></div>
                 <div className="space-y-1">

@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Item({ params }) {
   const [showAdditional, setShowAdditional] = useState(false);
+  const [descr, setDescr] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(null)
 
@@ -146,10 +147,15 @@ export default function Item({ params }) {
           </p>
 
           {/* Description header (unchanged) */}
-          <div className="py-3 border-b flex justify-between items-center">
+          <div className="py-3 border-b flex justify-between items-center cursor-pointer" onClick={() => setDescr(!descr)}>
             <p>Description</p>
             <Plus size={17} />
           </div>
+          {descr && (
+            <p className="text-sm text-muted-foreground py-2">
+              {product.description}
+            </p>
+          )}
 
           {/* Additional Info header (CLICKABLE) */}
           <div

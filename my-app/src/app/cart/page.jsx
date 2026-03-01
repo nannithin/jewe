@@ -127,7 +127,7 @@ export default function Cart() {
                     <div className="flex items-start justify-between text-sm border-b pb-4">
                         <p className="font-medium">Shipping</p>
                         <div className="space-y-3">
-                            <p className="text-muted-foreground">Shipping to <span className="text-black font-medium">LPU</span></p>
+                           { address.area && <p className="text-muted-foreground">Shipping to <span className="text-black font-medium">{address.area}</span></p>}
                             <p onClick={() => setAddOpen((prev) => !prev)} className="font-medium flex items-center gap-1">Change address <ChevronDown size={17} /></p>
                         </div>
                     </div>
