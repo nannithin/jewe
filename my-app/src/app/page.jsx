@@ -70,19 +70,19 @@ export default function Home() {
   }, []);
   const [cate, setCate] = useState([
     {
-      title: "Necklaces",
+      title: "Necklace",
       image: necklace
     },
     {
-      title: "Rings",
+      title: "Ring",
       image: rings
     },
     {
-      title: "Bracelets",
+      title: "Bracelet",
       image: bracel
     },
     {
-      title: "Earnings",
+      title: "Earning",
       image: earning
     },
 
@@ -218,7 +218,7 @@ export default function Home() {
                   key={ind}
                   className="pl-4 basis-1/2 lg:basis-1/5"
                   onClick={() => {
-                    router.push(`/item?category=${item.title}`)
+                    router.push(`/item?category=${item.title.toLowerCase()}`)
                   }}
                 >
                   <div className="flex flex-col items-center gap-4">
@@ -231,7 +231,7 @@ export default function Home() {
                         className="rounded-full object-cover"
                       />
                     </div>
-                    <p className="font-medium text-center">{item.title}</p>
+                    <p className="font-medium text-center">{item.title}s</p>
                   </div>
                 </CarouselItem>
               ))}
