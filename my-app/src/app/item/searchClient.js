@@ -8,20 +8,22 @@ import ItemCard from "@/components/cardd";
 export default function SearchClient() {
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
+  const category = searchParams.get("category");
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!search) {
-      setProducts([]);
-      setLoading(false);
-      return;
-    }
+    setLoading(true);
 
     const fetchResults = async () => {
       try {
-        const res = await api.get(`/products?search=${search}`);
+        let query = "";
+
+        if (search) query += `search=${search}`;
+        if (category) query += `${search ? "&" : ""}category=${category}`;
+
+        const res = await api.get(`/products?${query}`);
         setProducts(res.data);
       } catch (err) {
         console.error(err);
@@ -31,7 +33,7 @@ export default function SearchClient() {
     };
 
     fetchResults();
-  }, [search]);
+  }, [search, category]);
 
   if (!search) {
     return <p className="p-5">Search for products</p>;

@@ -29,11 +29,21 @@ export const createProduct = async (req, res) => {
 // GET /api/products?search=emerald
 export const getAllProducts = async (req, res) => {
   try {
-    const search = req.query.search || "";
+    const { search = "", category = "" } = req.query;
 
-    const products = await Product.find({
-      title: { $regex: search, $options: "i" },
-    }).sort({ createdAt: -1 });
+    let filter = {};
+
+    // Search by title
+    if (search) {
+      filter.title = { $regex: search, $options: "i" };
+    }
+
+    // Filter by category
+    if (category) {
+      filter.category = category;
+    }
+
+    const products = await Product.find(filter).sort({ createdAt: -1 });
 
     res.json(products);
   } catch (error) {

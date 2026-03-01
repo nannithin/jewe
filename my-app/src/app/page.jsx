@@ -92,7 +92,7 @@ export default function Home() {
     <div className="min-h-screen  space-y-8 pb-[100px]">
       <div
         id="home"
-        onClick={() => router.push(`/item?search=earnings`)}
+        onClick={() => router.push(`/category?search=earrings`)}
         className="relative w-full aspect-4/5 md:h-[600px] cursor-pointer"
       >
         <MultiCarousel
@@ -218,7 +218,7 @@ export default function Home() {
                   key={ind}
                   className="pl-4 basis-1/2 lg:basis-1/5"
                   onClick={() => {
-                    router.push(`/item?search=${item.title}`)
+                    router.push(`/item?category=${item.title}`)
                   }}
                 >
                   <div className="flex flex-col items-center gap-4">
