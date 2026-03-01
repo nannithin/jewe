@@ -29,6 +29,7 @@ import catering from '../../public/catering.jpg'
 import catebrace from '../../public/catbrace.jpg'
 import MultiCarousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import shop from '../../public/66aff2ae-ba09-4467-9030-ecd8ba1bf820.png'
 
 const responsive = {
   desktop: {
@@ -274,14 +275,14 @@ export default function Home() {
       </div>
       <div id="about" className="w-full bg-[#FCF9F1] ">
         <div className="md:grid grid-cols-2 md:px-10 md:py-20">
-          <div className="bg-white">
+          <div className="bg-white max-md:px-3">
+            <Image src={shop} alt="shop" className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-col items-center p-5 space-y-5 ">
             <h1 className="text-2xl text-center">Shop History</h1>
             <div className="max-md:text-center md:px-20 space-y-3">
-              <p>Village did removed enjoyed explain nor ham saw calling talking. Securing as informed declared or margaret. Joy horrible moreover man feelings own shy. Request norland neither mistake for yet. Between the for morning assured country believe.</p>
-              <p> On even feet time have an no at. Relation so in confined smallest children unpacked delicate. Why sir end believe uncivil respect. Always get adieus nature day course for common. My little garret repair to desire he esteem.</p>
-              <p> Improve ashamed married expense bed her comfort pursuit mrs.</p>
+              <p>Shree Kalka Jewellers stands proudly in the heart of Bhiwani, offering a beautiful collection of traditional and modern jewellery for every occasion. Known for its 5.0 Google rating, the shop has earned the trust of customers through quality products and friendly service. From elegant costume jewellery to festive and bridal designs, every piece reflects style and grace. Located opposite Balaji Mandir on Dinod Road, Shastri Nagar, the store is easy to find and welcomes customers with warmth and respect. The team carefully helps each visitor choose designs that match their taste and budget. Whether it is daily wear, wedding shopping, or a special gift, Shree Kalka Jewellers provides options that suit all needs. With attention to detail and commitment to customer satisfaction, the shop continues to build strong relationships in the local community. Their dedication to quality, affordable pricing, and honest service makes them a trusted jewellery destination in Haryana.
+              </p>
             </div>
           </div>
         </div>
