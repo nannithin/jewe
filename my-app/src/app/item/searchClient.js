@@ -35,7 +35,7 @@ export default function SearchClient() {
     fetchResults();
   }, [search, category]);
 
-  if (!search) {
+  if (!search && !category) {
     return <p className="p-5">Search for products</p>;
   }
 
