@@ -92,7 +92,7 @@ export default function OrderDetails() {
         </div>
 
         {/* Order Summary */}
-        <div className="mb-12 p-6 bg-secondary/30 border border-border rounded-lg">
+        {/* <div className="mb-12 p-6 bg-secondary/30 border border-border rounded-lg">
           <h3 className="font-light text-lg tracking-wide mb-6">Order Summary</h3>
           <div className="space-y-3">
             <div className="flex justify-between">
@@ -114,7 +114,7 @@ export default function OrderDetails() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {/* Shipping Details */}
@@ -124,10 +124,10 @@ export default function OrderDetails() {
               Shipping Address
             </h3>
             <div className="space-y-2 text-sm">
-              <p className="font-medium">{mockOrder.shippingAddress.name}</p>
-              <p className="text-muted-foreground">{mockOrder.shippingAddress.area}</p>
-              <p className="text-muted-foreground">{mockOrder.shippingAddress.city}</p>
-              <p className="text-muted-foreground">{mockOrder.shippingAddress.pincode}</p>
+              <p className="font-medium">{order.shippingAddress.name}</p>
+              <p className="text-muted-foreground">{order.shippingAddress.area}</p>
+              <p className="text-muted-foreground">{order.shippingAddress.city}</p>
+              <p className="text-muted-foreground">{order.shippingAddress.pincode}</p>
             </div>
           </div>
 
@@ -138,14 +138,14 @@ export default function OrderDetails() {
               Payment Details
             </h3>
             <div className="space-y-2 text-sm">
-              <p className="font-medium">{mockOrder.paymentDetails.name}</p>
+              <p className="font-medium">{order.paymentDetails.name}</p>
               <div className="mt-4 pt-4 border-t border-border">
                 <p className="text-muted-foreground mb-1">Transaction ID</p>
-                <p className="font-mono text-xs tracking-widest">{mockOrder.paymentDetails.transactionId}</p>
+                <p className="font-mono text-xs tracking-widest">{order.paymentDetails.transactionId}</p>
               </div>
               <div className="mt-4 pt-4 border-t border-border">
                 <p className="text-muted-foreground mb-1">Amount Paid</p>
-                <p className="text-lg font-light text-primary">₹{mockOrder.paymentDetails.amount.toLocaleString('en-IN')}</p>
+                <p className="text-lg font-light text-primary">₹{order.paymentDetails.amount.toLocaleString('en-IN')}</p>
               </div>
             </div>
           </div>
