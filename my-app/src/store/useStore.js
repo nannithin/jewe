@@ -38,16 +38,19 @@ const useStore = create(
       // ---------- CART ----------
       cart: [],
 
-      addToCart: (product, quantity = 1) =>
+      addToCart: (product, quantity = 1, size) =>
         set((state) => {
           const existing = state.cart.find(
-            (item) => String(item._id) === String(product._id)
+            (item) =>
+              String(item._id) === String(product._id) &&
+              item.size === size
           );
 
           if (existing) {
             return {
               cart: state.cart.map((item) =>
-                String(item._id) === String(product._id)
+                String(item._id) === String(product._id) &&
+                  item.size === size
                   ? { ...item, qty: item.qty + quantity }
                   : item
               ),
@@ -55,7 +58,7 @@ const useStore = create(
           }
 
           return {
-            cart: [...state.cart, { ...product, qty: quantity }],
+            cart: [...state.cart, { ...product, size, qty: quantity }],
           };
         }),
 

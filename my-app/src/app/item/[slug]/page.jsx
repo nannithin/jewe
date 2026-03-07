@@ -126,16 +126,27 @@ export default function Item({ params }) {
               />
             </div>
             <Button onClick={() => {
-              addToCart(product, quantity)
-              removeFromWishlist(product._id);
-              showToast.success("Item added to cart", {
-                duration: 4000,
-                progress: true,
-                position: "top-right",
-                transition: "popUp",
-                icon: '',
-                sound: true,
-              });
+              if (selectedSize) {
+                addToCart(product, quantity, selectedSize)
+                removeFromWishlist(product._id);
+                showToast.success("Item added to cart", {
+                  duration: 4000,
+                  progress: true,
+                  position: "top-right",
+                  transition: "popUp",
+                  icon: '',
+                  sound: true,
+                });
+              }else{
+                showToast.error("Select size", {
+                  duration: 4000,
+                  progress: true,
+                  position: "top-right",
+                  transition: "popUp",
+                  icon: '',
+                  sound: true,
+                });
+              }
 
             }} className={"bg-[#B5947C] border-none text-white"}>
               ADD TO CART
