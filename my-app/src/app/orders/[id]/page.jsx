@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
-export default function OrderDetails({ params }) {
-  const { id } = params;
+export default function OrderDetails() {
+  const { id } = useParams();
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
