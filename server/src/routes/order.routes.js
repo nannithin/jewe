@@ -104,6 +104,13 @@ router.get('/userorders', protect, async (req, res) => {
   }
 })
 
+router.get("/admin/pending-payments", async (req, res) => {
+  const orders = await Order.find({
+    paymentStatus: "pending_verification",
+  }).sort({ createdAt: -1 });
+
+  res.json({ orders });
+});
 
 
 router.get("/:id", protect, async (req, res) => {
