@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { Check, CreditCard, Package } from "lucide-react";
+import { Check, CreditCard, MapPin, Package } from "lucide-react";
 
 export default function OrderDetails() {
   const { id } = useParams();
