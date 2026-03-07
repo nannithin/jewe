@@ -9,7 +9,7 @@ import useStore from "@/store/useStore";
 
 export default function AdminPayments() {
   const [orders, setOrders] = useState([]);
-  const [load,setLoad] = useState(true)
+  const [load, setLoad] = useState(true)
   const user = useStore((state) => state.user);
   const [search, setSearch] = useState("");
   const router = useRouter();
@@ -30,7 +30,7 @@ export default function AdminPayments() {
       } catch (error) {
         setLoad(false)
         router.push("/login");
-      } finally{
+      } finally {
         setLoad(false)
       }
     };
@@ -97,6 +97,7 @@ export default function AdminPayments() {
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
         {filteredOrders.map((order) => (
           <div
+            onClick={() => router.push(`/admin/orders/${order._id}`)}
             key={order._id}
             className="bg-white/70 backdrop-blur-xl border border-neutral-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300"
           >

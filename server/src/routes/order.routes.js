@@ -71,6 +71,27 @@ router.post("/create", protect, async (req, res) => {
   }
 });
 
+router.get("/admin/:id", protect, async (req, res) => {
+  try {
+
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Admin access required" });
+    }
+
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    res.json({ order });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 router.get('/userorders', protect, async (req, res) => {
   console.log(req.user.id);
   try {
