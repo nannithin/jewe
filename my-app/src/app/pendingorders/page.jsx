@@ -97,7 +97,7 @@ export default function AdminPayments() {
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
         {filteredOrders.map((order) => (
           <div
-            onClick={() => router.push(`/admin/orders/${order._id}`)}
+            onClick={() => router.push(`/orders/${order._id}`)}
             key={order._id}
             className="bg-white/70 backdrop-blur-xl border border-neutral-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300"
           >
