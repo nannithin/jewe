@@ -1,6 +1,12 @@
+'use client';
+
+import { useRouter } from "next/navigation";
+
+
 export default function OrderCard({ order }) {
+  const router = useRouter();
   return (
-    <div className="bg-white rounded-2xl shadow-sm border p-6 sm:p-8 max-w-md w-full mx-auto hover:shadow-md transition">
+    <div onClick={() => router.push(`/orders/${order._id}`)} className="bg-white rounded-2xl shadow-sm border p-6 sm:p-8 max-w-md w-full mx-auto hover:shadow-md transition">
       
       {/* Order ID */}
       <h2 className="text-xl sm:text-2xl font-semibold mb-6">
