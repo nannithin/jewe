@@ -42,9 +42,11 @@ export default function () {
         password: user.password,
       });
 
-      console.log(res.data.user);
-      const setUser = useStore.getState().setUser;
-      setUser(res.data);
+        const { user: loggedUser } = res.data;
+
+    
+    const setUser = useStore.getState().setUser;
+    setUser(loggedUser);
       router.push('/')
     } catch (error) {
       console.error(error.response?.data?.message);

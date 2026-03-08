@@ -32,7 +32,7 @@ const handleSubmit = async (e) => {
       password: user.password,
     });
 
-    const { token, user: loggedUser } = res.data;
+    const { user: loggedUser } = res.data;
 
     // Save token separately
 
