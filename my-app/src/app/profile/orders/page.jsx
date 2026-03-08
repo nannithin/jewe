@@ -24,7 +24,7 @@ export default function OrderCard({ order }) {
 
   return (
     <div
-      onClick={() => router.push(`/orders/${order._id}`)}
+      onClick={() => router.push(`/orders/${order?._id}`)}
       className="group bg-white rounded-2xl shadow-md hover:shadow-xl border border-border overflow-hidden transition-all duration-300 cursor-pointer max-w-md w-full mx-auto"
     >
       {/* Top Accent Bar */}
