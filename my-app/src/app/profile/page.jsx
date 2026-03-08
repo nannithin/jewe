@@ -7,13 +7,14 @@ import useStore from "@/store/useStore";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function () {
     const router = useRouter()
     const { user, logout } = useStore();
     console.log(user);
-    
+    const [admin,setAdmin] = useState(false)
+
     const handleLogout = async () => {
         try {
             await api.post("/auth/logout");
@@ -25,22 +26,43 @@ export default function () {
     };
 
 
-    useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                const res = await api.get("/products/dashboard");
+    // useEffect(() => {
+    //     const checkAuth = async () => {
+    //         try {
+    //             const res = await api.get("/products/dashboard");
 
-                if (res.status === 200) {
-                    router.push("/profile");
-                } else {
-                    router.push("/auth/login");
+    //             if (res.status === 200) {
+    //                 router.push("/profile");
+    //             } else {
+    //                 router.push("/auth/login");
+    //             }
+    //         } catch (error) {
+    //             router.push("/auth/login");
+    //         }
+    //     };
+
+    //     checkAuth();
+    // }, []);
+    useEffect(() => {
+        const checkAdmin = async () => {
+            try {
+                const res = await api.get("/auth/me");
+
+                if (res.data.user.role !== "admin") {
+                    setAdmin(true)
+                }
+                if(!res.data.user){
+                    router.push('/login')
                 }
             } catch (error) {
-                router.push("/auth/login");
+                setLoad(false)
+                router.push("/login");
+            } finally {
+                setLoad(false)
             }
         };
 
-        checkAuth();
+        checkAdmin();
     }, []);
 
     return (
@@ -53,7 +75,7 @@ export default function () {
                 </div>
             </div>
             {
-                user?.role == 'admin' &&
+                admin &&
                 <>
                     <Link href={"/createproduct"} className="flex items-center justify-between py-3 border-b">
                         <p>Add Product</p>
