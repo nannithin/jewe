@@ -82,8 +82,8 @@ router.get("/admin/pending-payments", async (req, res) => {
 router.get("/admin/:id", protect, async (req, res) => {
   try {
 
-    if (req.user.role !== "admin") {
-      return res.status(403).json({ message: "Admin access required" });
+    if (!req.params.id) {
+      return res.status(403).json({ message: "order not found" });
     }
 
     const order = await Order.findById(req.params.id);
