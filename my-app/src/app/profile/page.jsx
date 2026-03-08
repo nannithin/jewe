@@ -47,7 +47,8 @@ export default function () {
         const checkAdmin = async () => {
             try {
                 const res = await api.get("/auth/me");
-
+                console.log(res.data.user);
+                
                 if (res.data.user.role !== "admin") {
                     setAdmin(true)
                 }
@@ -64,6 +65,8 @@ export default function () {
 
         checkAdmin();
     }, []);
+    console.log(admin);
+    
 
     return (
         <div className="w-full pb-12 pt-7 px-5 space-y-5">
