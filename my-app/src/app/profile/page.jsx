@@ -49,7 +49,7 @@ export default function () {
                 const res = await api.get("/auth/me");
                 console.log(res.data.user);
                 
-                if (res.data.user.role !== "admin") {
+                if (res.data.user.role === "admin") {
                     setAdmin(true)
                 }
                 if(!res.data.user){
