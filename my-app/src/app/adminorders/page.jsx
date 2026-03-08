@@ -154,7 +154,7 @@ export default function AdminOrders() {
                       <td className="px-8 py-5 text-right">
                         <Button
                           onClick={() =>
-                            router.push(`/admin/orders/${order._id}`)
+                            router.push(`/orders/${order._id}`)
                           }
                           className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg inline-flex items-center gap-2 transition-all"
                         >
