@@ -71,6 +71,23 @@ router.post("/create", protect, async (req, res) => {
   }
 });
 
+router.get("/admin/orders", protect, async (req, res) => {
+  try {
+
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Admin access required" });
+    }
+
+    const orders = await Order.find()
+      .sort({ createdAt: -1 });
+
+    res.json({ orders });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 router.get("/admin/pending-payments", async (req, res) => {
   const orders = await Order.find({
     paymentStatus: "pending_verification",
@@ -112,7 +129,34 @@ router.get('/userorders', protect, async (req, res) => {
   }
 })
 
+router.put("/admin/orders/status/:id", protect, async (req, res) => {
+  try {
 
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Admin access required" });
+    }
+
+    const { status } = req.body;
+
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    order.orderStatus = status;
+
+    await order.save();
+
+    res.json({
+      message: "Order status updated",
+      order,
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 
 router.get("/:id", protect, async (req, res) => {
