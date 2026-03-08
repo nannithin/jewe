@@ -20,7 +20,7 @@ export default function OrderCard({ order }) {
         <div>
           <p className="text-sm sm:text-base">Total Amount</p>
           <p className="text-2xl sm:text-3xl font-semibold text-black">
-            ${order.totalAmount}
+            ₹{order.totalAmount}
           </p>
         </div>
 
