@@ -42,7 +42,7 @@ export default function () {
         password: user.password,
       });
 
-      console.log(res.data);
+      console.log(res.data.user);
       const setUser = useStore.getState().setUser;
       setUser(res.data);
       router.push('/')
