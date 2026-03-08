@@ -12,7 +12,8 @@ import { useEffect } from "react";
 export default function () {
     const router = useRouter()
     const { user, logout } = useStore();
-
+    console.log(user);
+    
     const handleLogout = async () => {
         try {
             await api.post("/auth/logout");
