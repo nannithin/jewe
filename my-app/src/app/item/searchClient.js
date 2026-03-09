@@ -46,7 +46,7 @@ export default function SearchClient() {
   return (
     <div className="p-5 space-y-5 pb-32 pt-8">
       <h1 className="text-xl">
-        Search results for “{search}”
+        Search results for “{search ? search : category}”
       </h1>
 
       {products.length === 0 ? (
