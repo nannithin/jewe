@@ -88,11 +88,15 @@ export default function () {
                         <p>Pending Orders</p>
                         <ChevronRight />
                     </Link>
+                    <Link href={"/adminorders"} className="flex items-center justify-between py-3 border-b">
+                        <p>Admin Orders</p>
+                        <ChevronRight />
+                    </Link>
                 </>
             }
 
             <Link href={"/profile/orders"} className="flex items-center justify-between py-3 border-b">
-                <p>Orders</p>
+                <p>My Orders</p>
                 <ChevronRight />
             </Link>
             <Link href={"/profile/help"} className="flex items-center justify-between py-3 border-b">
