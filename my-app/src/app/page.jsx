@@ -93,7 +93,6 @@ export default function Home() {
     <div className="min-h-screen  space-y-8 pb-[100px]">
       <div
         id="home"
-        onClick={() => router.push(`/category?search=earrings`)}
         className="relative w-full aspect-4/5 md:h-[600px] cursor-pointer"
       >
         <MultiCarousel
@@ -104,7 +103,8 @@ export default function Home() {
           arrows={false}
           showDots
         >
-          <div className="relative w-full aspect-4/5 md:h-[600px]">
+          <div onClick={() => router.push(`/item?category=earrings`)}
+           className="relative w-full aspect-4/5 md:h-[600px]">
             <Image
               src={bg}
               alt="bg"
@@ -121,7 +121,8 @@ export default function Home() {
             />
           </div>
 
-          <div className="relative w-full aspect-4/5 md:h-[600px]">
+          <div onClick={() => router.push(`/item?category=rings`)}
+           className="relative w-full aspect-4/5 md:h-[600px]">
             <Image
               src={smallbg2}
               alt="bg"
