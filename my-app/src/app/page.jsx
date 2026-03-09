@@ -96,7 +96,7 @@ export default function Home() {
 
 if (loading) {
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center h-[calc(100vh-80px)] mt-[80px]">
       <Loader />
     </div>
   );
