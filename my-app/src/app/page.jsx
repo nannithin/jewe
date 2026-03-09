@@ -30,6 +30,7 @@ import catebrace from '../../public/catbrace.jpg'
 import MultiCarousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import shop from '../../public/66aff2ae-ba09-4467-9030-ecd8ba1bf820.png'
+import Loader from "@/components/loader";
 
 const responsive = {
   desktop: {
@@ -92,11 +93,11 @@ export default function Home() {
     },
 
   ])
-  
+
   if (loading) {
   return (
     <div className="flex justify-center items-center h-40">
-      <div className="w-10 h-10 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+      <Loader />
     </div>
   );
 }
