@@ -156,7 +156,7 @@ export default function AdminOrders() {
                           onClick={() =>
                             router.push(`/orders/${order._id}`)
                           }
-                          className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg inline-flex items-center gap-2 transition-all"
+                          className="text-primary-foreground font-semibold rounded-lg inline-flex items-center gap-2 transition-all"
                         >
                           View Details
                           <ChevronRight className="w-4 h-4" />

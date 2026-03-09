@@ -78,7 +78,7 @@ const Header = () => {
                         <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-[#B3B3B3]" />
                     </div>
                     <Menu className="md:hidden" onClick={() => setOpen(prev => !prev)} />
-                    <h1 className="md:absolute md:left-1/2 md:-translate-x-1/2 text-[19px] italic  text-[#222222]">Kalka Jeweller</h1>
+                    <h1 className="md:absolute md:left-1/2 md:-translate-x-1/2 text-[20px] italic  text-[#222222]">Kalka Jeweller</h1>
                     <div className="flex items-center md:gap-3">
                         <Link href={"/profile"}><User className="max-md:hidden" /></Link>
                         <Link href={"/wishlist"}><Heart className="max-md:hidden" /></Link>
