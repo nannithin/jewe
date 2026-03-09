@@ -43,7 +43,7 @@ export default function AdminOrders() {
   };
 
   const getPaymentStatusBadge = (status) => {
-    return status === "completed"
+    return status === "paid"
       ? "text-emerald-600 font-medium"
       : "text-amber-600 font-medium";
   };
