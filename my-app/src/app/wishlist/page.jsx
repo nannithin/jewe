@@ -57,7 +57,7 @@ export default function Wishlist() {
 
               <p className="text-sm">Price: ${item.price}</p>
               <div className="grid grid-cols-4 gap-3">
-                {item?.sizes.map((size) => (
+                {item.sizes.map((size) => (
                   <button
                     key={size.label}
                     onClick={() => setSelectedSize(size.label)}

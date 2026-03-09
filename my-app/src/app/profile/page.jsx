@@ -73,8 +73,8 @@ export default function () {
             <div className="flex md:flex-row flex-col items-center gap-5">
                 <div className="w-28 h-28 rounded-full bg-accent"></div>
                 <div className="space-y-1">
-                    <h1 className="font-medium">{user?.name}</h1>
-                    <p>{user?.email}</p>
+                    <h1 className="font-medium text-center">{user?.name}</h1>
+                    <p className="text-center">{user?.email}</p>
                 </div>
             </div>
             {
