@@ -48,6 +48,8 @@ const responsive = {
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
@@ -64,6 +66,8 @@ export default function Home() {
         setProducts(res.data.slice(0, 10)); // latest 10
       } catch (error) {
         console.error(error);
+      } finally{
+        setLoading(false);
       }
     };
 
@@ -88,6 +92,14 @@ export default function Home() {
     },
 
   ])
+  
+  if (loading) {
+  return (
+    <div className="flex justify-center items-center h-40">
+      <div className="w-10 h-10 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
+}
 
   return (
     <div className="min-h-screen  space-y-8 pb-[100px]">
