@@ -6,6 +6,7 @@ import useStore from "@/store/useStore";
 import Link from "next/link";
 import { showToast } from "nextjs-toast-notify";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Wishlist() {
   const { wishlist, removeFromWishlist, addToCart } = useStore();
