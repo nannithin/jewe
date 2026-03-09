@@ -149,7 +149,10 @@ export default function AdminPayments() {
             <div className="flex gap-3">
               <Button
                 className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 hover:opacity-90"
-                onClick={() => approve(order._id)}
+                onClick={(e) =>{
+                  e.stopPropagation();
+                  approve(order._id)
+                }}
               >
                 Approve
               </Button>
@@ -157,7 +160,11 @@ export default function AdminPayments() {
               <Button
                 variant="outline"
                 className="flex-1 border-red-400 text-red-600 hover:bg-red-50"
-                onClick={() => reject(order._id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  reject(order._id)
+
+                }}
               >
                 Reject
               </Button>

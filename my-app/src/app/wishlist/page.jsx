@@ -9,6 +9,7 @@ import Image from "next/image";
 
 export default function Wishlist() {
   const { wishlist, removeFromWishlist, addToCart } = useStore();
+  const [selectedSize, setSelectedSize] = useState(null)
 
   if (wishlist.length === 0) {
     return (
@@ -37,7 +38,7 @@ export default function Wishlist() {
 
           >
             <div className="w-24 h-24 aspect-square bg-accent rounded-md">
-              <Image src={item?.image} alt="item" className="w-full aspect-square"/>
+              <Image src={item?.image} alt="item" className="w-full aspect-square" />
             </div>
 
             <div className="flex-1 space-y-3">
@@ -55,6 +56,28 @@ export default function Wishlist() {
               </div>
 
               <p className="text-sm">Price: ${item.price}</p>
+              <div className="grid grid-cols-4 gap-3">
+                {item?.sizes.map((size) => (
+                  <button
+                    key={size.label}
+                    onClick={() => setSelectedSize(size.label)}
+                    disabled={!size.available}
+                    className={`
+                  py-3 px-2 rounded-lg font-medium text-sm transition-all duration-200
+                  ${selectedSize === size.label
+                        ? 'bg-gray-900 text-white border-2 border-gray-900'
+                        : 'bg-gray-100 text-gray-900 border-2 border-gray-200 hover:border-gray-300'
+                      }
+                  ${!size.available
+                        ? 'opacity-40 cursor-not-allowed line-through'
+                        : 'cursor-pointer'
+                      }
+                `}
+                  >
+                    {size.label}
+                  </button>
+                ))}
+              </div>
 
               <Button
                 variant="link"
@@ -62,7 +85,7 @@ export default function Wishlist() {
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
-                  addToCart(item);
+                  addToCart(item, selectedSize)
                   removeFromWishlist(item._id);
                   showToast.success("Item added to cart", {
                     duration: 4000,
