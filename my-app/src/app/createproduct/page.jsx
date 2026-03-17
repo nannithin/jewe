@@ -32,7 +32,7 @@ export default function ProductForm() {
     title: '',
     description: '',
     price: '',
-    currency: 'USD',
+    currency: 'inr',
     inStock: true,
     stockQuantity: '0',
     category: '',
@@ -57,10 +57,10 @@ export default function ProductForm() {
         }
       } catch (error) {
         console.log(error);
-        
+
         setLoading(false)
         //router.push("/auth/login");
-      } finally{
+      } finally {
         setLoading(false)
       }
     };
@@ -141,6 +141,7 @@ export default function ProductForm() {
       const payload = {
         ...formData,
         price: parseFloat(formData.price),
+        originalPrice: parseFloat(formData.originalPrice),
         stockQuantity: parseInt(formData.stockQuantity),
         sizes: sizes,
         image: imageUrl, // 👈 add image URL here
@@ -155,7 +156,8 @@ export default function ProductForm() {
         title: '',
         description: '',
         price: '',
-        currency: 'USD',
+        originalPrice: '',
+        currency: 'inr',
         inStock: true,
         stockQuantity: '0',
         category: '',
@@ -355,13 +357,23 @@ export default function ProductForm() {
                     className="border-amber-200 focus:border-amber-500"
                   />
                 </div>
-
                 <div className="space-y-2">
-                  <Label htmlFor="currency" className="text-amber-900 font-medium">
-                    Currency
+                  <Label className="text-amber-900 font-medium">
+                    Original Price *
                   </Label>
-
+                  <Input
+                    type="number"
+                    placeholder="0.00"
+                    value={formData.originalPrice}
+                    onChange={(e) =>
+                      handleInputChange("originalPrice", e.target.value)
+                    }
+                    required
+                    className="border-amber-200 focus:border-amber-500"
+                  />
                 </div>
+
+                
 
                 <div className="space-y-2">
                   <Label htmlFor="stockQuantity" className="text-amber-900 font-medium">

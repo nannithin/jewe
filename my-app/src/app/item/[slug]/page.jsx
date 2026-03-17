@@ -62,7 +62,23 @@ export default function Item({ params }) {
 
         <div className="space-y-3">
           <h1 className="tracking-wide text-xl">{product.title}</h1>
-          <h2 className="font-medium text-xl">₹{product.price}</h2>
+          <div className="flex items-center gap-3">
+            <h2 className="font-medium text-xl text-[#B5947C]">
+              ₹{product.price}
+            </h2>
+
+            {product.originalPrice > product.price && (
+              <>
+                <p className="text-gray-400 line-through">
+                  ₹{product.originalPrice}
+                </p>
+
+                <p className="text-green-600 text-sm font-medium">
+                  {product.discountPercentage}% OFF
+                </p>
+              </>
+            )}
+          </div>
 
           <p className="text-muted-foreground text-sm py-2">
             {product.description}
@@ -137,7 +153,7 @@ export default function Item({ params }) {
                   icon: '',
                   sound: true,
                 });
-              }else{
+              } else {
                 showToast.error("Select size", {
                   duration: 4000,
                   progress: true,

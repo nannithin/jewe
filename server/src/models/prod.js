@@ -20,6 +20,17 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
 
+    originalPrice: {
+      type: Number,
+      required: true,
+      validate: {
+        validator: function (value) {
+          return value >= this.price;
+        },
+        message: "Original price must be greater than or equal to price",
+      },
+    },
+
     currency: {
       type: String,
       default: "USD",

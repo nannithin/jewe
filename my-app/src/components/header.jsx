@@ -156,7 +156,7 @@ const Header = () => {
                     className="flex flex-col items-center gap-1 list-none cursor-pointer"
                 >
                     <User size={20} />
-                    <span className="text-[13px]">Account</span>
+                    <span className="text-[13px] select-none">Account</span>
                 </div>
 
             </div>
