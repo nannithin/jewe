@@ -56,11 +56,9 @@ export default function () {
                     router.push('/login')
                 }
             } catch (error) {
-                setLoad(false)
+                
                 router.push("/login");
-            } finally {
-                setLoad(false)
-            }
+            } 
         };
 
         checkAdmin();
