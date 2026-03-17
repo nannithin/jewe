@@ -95,6 +95,20 @@ export default function Home() {
 
   ])
 
+if (loading) {
+  return (
+    <div className="flex items-center justify-center h-[calc(100vh-80px)] mt-[80px]">
+      <ClipLoader
+        color={"B5947C"}
+        loading={loading}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
+  );
+}
+
   return (
     <div className="min-h-screen  space-y-8 pb-[100px]">
       <div
@@ -302,13 +316,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <ClipLoader
-        color={"B5947C"}
-        loading={loading}
-        size={150}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+
     </div>
   );
 }
