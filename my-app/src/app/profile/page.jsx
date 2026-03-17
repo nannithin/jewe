@@ -13,7 +13,7 @@ import { BounceLoader } from "react-spinners";
 export default function () {
     const router = useRouter()
     const { user, logout } = useStore();
-    const [loading,setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
     console.log(user);
     const [admin, setAdmin] = useState(false)
 
@@ -24,7 +24,7 @@ export default function () {
             router.push("/");
         } catch (error) {
             console.error(error);
-        } finally{
+        } finally {
             setLoading(false)
         }
     };
@@ -59,7 +59,7 @@ export default function () {
                 }
             } catch (error) {
                 router.push("/auth/login");
-            } finally{
+            } finally {
                 setLoading(false)
             }
         };
@@ -67,14 +67,23 @@ export default function () {
         checkAdmin();
     }, []);
 
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-[calc(100vh-80px)]">
+                <BounceLoader
+                    color={"#B5947C"}
+                    loading={loading}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+            </div>
+        );
+    }
+
     return (
         <div className="w-full pb-12 pt-7 px-5 space-y-5">
-            <BounceLoader
-                color={"#B5947C"}
-                loading={loading}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-            />
+
             <div className="flex md:flex-row flex-col items-center gap-5">
                 <div className="w-28 h-28 rounded-full bg-accent"></div>
                 <div className="space-y-1">
