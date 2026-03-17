@@ -53,11 +53,11 @@ export default function () {
                     setAdmin(true)
                 }
                 if(!res.data.user){
-                    router.push('/login')
+                    router.push('/auth/login')
                 }
             } catch (error) {
                 
-                router.push("/login");
+                router.push("/auth/login");
             } 
         };
 

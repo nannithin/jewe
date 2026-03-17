@@ -31,6 +31,7 @@ import MultiCarousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import shop from '../../public/66aff2ae-ba09-4467-9030-ecd8ba1bf820.png'
 import Loader from "@/components/loader";
+import { ClipLoader } from "react-spinners";
 
 const responsive = {
   desktop: {
@@ -97,7 +98,7 @@ export default function Home() {
 if (loading) {
   return (
     <div className="flex items-center justify-center h-[calc(100vh-80px)] mt-[80px]">
-      <Loader />
+      
     </div>
   );
 }
@@ -309,7 +310,13 @@ if (loading) {
           </div>
         </div>
       </div>
-
+      <ClipLoader
+        color={"B5947C"}
+        loading={loading}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
     </div>
   );
 }
