@@ -14,10 +14,10 @@ export default function () {
     const router = useRouter()
     const { user, logout } = useStore();
     const [loading, setLoading] = useState(true)
-    console.log(user);
     const [admin, setAdmin] = useState(false)
 
     const handleLogout = async () => {
+        setLoading(true)
         try {
             await api.post("/auth/logout");
             logout(); // reset Zustand
