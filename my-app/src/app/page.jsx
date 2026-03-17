@@ -95,14 +95,6 @@ export default function Home() {
 
   ])
 
-if (loading) {
-  return (
-    <div className="flex items-center justify-center h-[calc(100vh-80px)] mt-[80px]">
-      
-    </div>
-  );
-}
-
   return (
     <div className="min-h-screen  space-y-8 pb-[100px]">
       <div
