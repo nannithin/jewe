@@ -8,12 +8,14 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BounceLoader } from "react-spinners";
 
 export default function () {
     const router = useRouter()
     const { user, logout } = useStore();
+    const [loading,setLoading] = useState(true)
     console.log(user);
-    const [admin,setAdmin] = useState(false)
+    const [admin, setAdmin] = useState(false)
 
     const handleLogout = async () => {
         try {
@@ -22,6 +24,8 @@ export default function () {
             router.push("/");
         } catch (error) {
             console.error(error);
+        } finally{
+            setLoading(false)
         }
     };
 
@@ -47,27 +51,30 @@ export default function () {
         const checkAdmin = async () => {
             try {
                 const res = await api.get("/auth/me");
-                console.log(res.data.user);
-                
                 if (res.data.user.role === "admin") {
                     setAdmin(true)
                 }
-                if(!res.data.user){
+                if (!res.data.user) {
                     router.push('/auth/login')
                 }
             } catch (error) {
-                
                 router.push("/auth/login");
-            } 
+            } finally{
+                setLoading(false)
+            }
         };
 
         checkAdmin();
     }, []);
-    console.log(admin);
-    
 
     return (
         <div className="w-full pb-12 pt-7 px-5 space-y-5">
+            <BounceLoader
+                color={"#B5947C"}
+                loading={loading}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
             <div className="flex md:flex-row flex-col items-center gap-5">
                 <div className="w-28 h-28 rounded-full bg-accent"></div>
                 <div className="space-y-1">
