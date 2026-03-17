@@ -3,24 +3,41 @@ import slugify from "slugify";
 
 export const createProduct = async (req, res) => {
   try {
-    const { title, ...rest } = req.body;
+    const { title, price, originalPrice, ...rest } = req.body;
 
+    // 🔥 Basic validation
+    if (!price || !originalPrice) {
+      return res.status(400).json({
+        message: "Price and original price are required",
+      });
+    }
+
+    if (originalPrice < price) {
+      return res.status(400).json({
+        message: "Original price must be greater than or equal to price",
+      });
+    }
+
+    // 🔥 Slug
     const slug = slugify(title, {
-      lower: true,       // convert to lowercase
-      strict: true,      // remove special characters
+      lower: true,
+      strict: true,
       trim: true,
     });
 
     const product = await Product.create({
       title,
       slug,
+      price,
+      originalPrice,
       ...rest,
     });
 
     res.status(201).json({
       message: "Product created successfully",
-      product,
+      product, // includes discountPercentage (virtual)
     });
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

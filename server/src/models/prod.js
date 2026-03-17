@@ -101,4 +101,16 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+productSchema.virtual("discountPercentage").get(function () {
+  if (!this.originalPrice || this.originalPrice === this.price) return 0;
+
+  return Math.round(
+    ((this.originalPrice - this.price) / this.originalPrice) * 100
+  );
+});
+
+// 🔥 Include virtuals in response
+productSchema.set("toJSON", { virtuals: true });
+productSchema.set("toObject", { virtuals: true });
+
 export default mongoose.model("Product", productSchema);
