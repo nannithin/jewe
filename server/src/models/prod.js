@@ -79,10 +79,12 @@ const productSchema = new mongoose.Schema(
     },
 
     // ✅ Single Image (Supabase URL)
-    image: {
-      type: String,
-      required: true,
-    },
+    images: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
 
     additionalInfo: {
       type: String,
