@@ -130,6 +130,15 @@ export default function ProductForm() {
     setSuccess(false);
 
     try {
+      const price = parseFloat(formData.price);
+      const originalPrice = parseFloat(formData.originalPrice);
+
+      // 🔥 VALIDATION HERE
+      if (originalPrice <= price) {
+        setError("Original price must be greater than selling price");
+        setLoading(false);
+        return;
+      }
       let imageUrls = [];
 
       // 🔥 1. Upload Image to Supabase First
@@ -154,6 +163,8 @@ export default function ProductForm() {
           }
         }
       }
+
+
 
       // 🔥 2. Create Payload
       const payload = {
