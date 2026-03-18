@@ -144,7 +144,7 @@ export default function ProductForm() {
         originalPrice: parseFloat(formData.originalPrice),
         stockQuantity: parseInt(formData.stockQuantity),
         sizes: sizes,
-        image: imageUrl, // 👈 add image URL here
+        image: [imageUrl], // 👈 add image URL here
       };
 
       const response = await api.post('/products', payload);
