@@ -327,7 +327,7 @@ export default function Item({ params }) {
         </h3>
 
         {/* Price + Button */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-center justify-between">
           <div className="flex flex-col">
             <span className="text-base font-semibold text-[#B5947C]">
               ₹{item.price}
