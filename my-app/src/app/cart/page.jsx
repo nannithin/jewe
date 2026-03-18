@@ -9,6 +9,7 @@ import api from "@/lib/axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { showToast } from "nextjs-toast-notify";
 
 
 
@@ -233,7 +234,14 @@ export default function Cart() {
 
                                 router.push(`/payment/${res.data.order._id}`);
                             } catch (err) {
-                                console.error(err);
+                                showToast.error("Login to place order", {
+                                    duration: 3000,
+                                    progress: true,
+                                    position: "top-right",
+                                    transition: "popUp",
+                                    icon: '',
+                                    sound: true,
+                                });
                             }
                         }}
                     >
