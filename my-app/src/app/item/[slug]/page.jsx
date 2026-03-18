@@ -8,6 +8,7 @@ import Image from "next/image";
 import { showToast } from "nextjs-toast-notify";
 import React, { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import api from "@/lib/axios";
 
 export default function Item({ params }) {
   const [showAdditional, setShowAdditional] = useState(false);
@@ -44,25 +45,27 @@ export default function Item({ params }) {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const res = await fetch(
-        ` http://localhost:5000/api/products/${slug}`
-      );
-      const data = await res.json();
-      setProduct(data);
+      try {
+        const res = await api.get(`/products/${slug}`);
+        setProduct(res.data);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     fetchProduct();
-  }, []);
+  }, [slug]);
+
   useEffect(() => {
     if (!product?._id) return;
 
     const fetchRelated = async () => {
-      const res = await fetch(
-        ` http://localhost:5000/api/products/related/${product._id}`
-      );
-
-      const data = await res.json();
-      setRelated(data.products);
+      try {
+        const res = await api.get(`/products/related/${product._id}`);
+        setRelated(res.data.products);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     fetchRelated();

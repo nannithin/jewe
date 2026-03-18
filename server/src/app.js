@@ -9,7 +9,7 @@ import orderRoutes from "./routes/order.routes.js";
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://kalka-jeweller.vercel.app",
     credentials: true,
   })
 );
