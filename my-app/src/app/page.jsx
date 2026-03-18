@@ -280,7 +280,7 @@ if (loading) {
               {products.map((product, ind) => (
                 <CarouselItem
                   key={product._id}
-                  className="basis-1/2 md:basis-1/3 lg:basis-1/5 flex justify-center"
+                  className="basis-1/2 md:basis-1/3 lg:basis-1/5"
                 >
                   <ItemCard product={product} />
                 </CarouselItem>

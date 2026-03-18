@@ -22,7 +22,7 @@ const ItemCard = ({ product: item }) => {
         <div
             key={item._id}
             onClick={() => router.push(`/item/${item.slug}`)}
-            className="group flex flex-col overflow-hidden  bg-white transition-all duration-300 cursor-pointer p-2"
+            className="group flex flex-col w-full overflow-hidden bg-white transition-all duration-300 cursor-pointer p-2"
         >
             {/* Image */}
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-100">
