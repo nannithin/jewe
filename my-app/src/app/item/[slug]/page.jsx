@@ -82,7 +82,7 @@ export default function Item({ params }) {
           {/* 🔥 Carousel */}
           <div className="overflow-hidden rounded-lg" ref={emblaRef}>
             <div className="flex">
-              {images.map((img, index) => (
+              {product?.images.map((img, index) => (
                 <div key={index} className="min-w-full">
                   <div className="w-full aspect-square bg-accent">
                     <Image
@@ -100,7 +100,7 @@ export default function Item({ params }) {
 
           {/* 🔥 Dots Indicator */}
           <div className="flex justify-center gap-2">
-            {images.map((_, index) => (
+            {product?.images.map((_, index) => (
               <button
                 key={index}
                 onClick={() => scrollTo(index)}
@@ -114,7 +114,7 @@ export default function Item({ params }) {
 
           {/* 🔥 Thumbnails */}
           <div className="flex gap-2 overflow-x-auto">
-            {images.map((img, index) => (
+            {product?.images.map((img, index) => (
               <img
                 key={index}
                 src={img}
