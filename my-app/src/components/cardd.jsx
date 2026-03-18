@@ -4,7 +4,7 @@ import Link from "next/link";
 import necklace from "../../public/necklace.jpg";
 import useStore from "@/store/useStore";
 
-const ItemCard = ({ item : product }) => {
+const ItemCard = ({ product : item }) => {
     const { wishlist, addToWishlist, removeFromWishlist } = useStore();
     console.log(wishlist);
 
