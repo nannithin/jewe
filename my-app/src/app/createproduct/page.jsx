@@ -150,7 +150,8 @@ export default function ProductForm() {
       const response = await api.post('/products', payload);
 
       setSuccess(true);
-
+      console.log(response);
+      
       // Reset
       setFormData({
         title: '',
