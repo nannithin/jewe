@@ -9,9 +9,11 @@ import { showToast } from "nextjs-toast-notify";
 import React, { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import api from "@/lib/axios";
+import { useRouter } from "next/navigation";
 
 export default function Item({ params }) {
   const [showAdditional, setShowAdditional] = useState(false);
+  const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [descr, setDescr] = useState(false);
