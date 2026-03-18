@@ -5,25 +5,24 @@ import necklace from "../../public/necklace.jpg";
 import useStore from "@/store/useStore";
 import { Button } from "./ui/button";
 
-const ItemCard = ({ product : item }) => {
+const ItemCard = ({ product: item }) => {
     const { wishlist, addToWishlist, removeFromWishlist } = useStore();
-    console.log(wishlist);
 
 
-    const isWishlisted = wishlist.some((item) => item._id === product._id);
+    const isWishlisted = wishlist.some((ite) => ite._id === item._id);
 
     const handleWishlist = () => {
         if (isWishlisted) {
-            removeFromWishlist(product._id);
+            removeFromWishlist(item._id);
         } else {
-            addToWishlist(product);
+            addToWishlist(item);
         }
     };
     return (
         <div
             key={item._id}
             onClick={() => router.push(`/item/${item.slug}`)}
-            className="group flex flex-col overflow-hidden  bg-white transition-all duration-300 cursor-pointer"
+            className="group flex flex-col overflow-hidden  bg-white transition-all duration-300 cursor-pointer p-2"
         >
             {/* Image */}
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-100">
@@ -45,16 +44,16 @@ const ItemCard = ({ product : item }) => {
                     </span>
                 )}
                 <Heart onClick={(e) => {
-                        e.preventDefault();      // stops Link navigation
-                        e.stopPropagation();     // stops bubbling
-                        handleWishlist();
-                    }} size={18} className={`absolute top-3 right-3 font-normal ${isWishlisted && "fill-[#B5947C] text-[#B5947C]"}`} />
+                    e.preventDefault();      // stops Link navigation
+                    e.stopPropagation();     // stops bubbling
+                    handleWishlist();
+                }} size={18} className={`absolute top-3 right-3 font-normal ${isWishlisted && "fill-[#B5947C] text-[#B5947C]"}`} />
             </div>
 
             {/* Content */}
-            <div className="flex flex-col justify-between gap-2 mt-2 flex-1">
+            <div className="flex flex-col justify-between gap-3 mt-2 flex-1">
                 {/* Title */}
-                <h3 className="font-medium text-[17px] text-gray-500 line-clamp-2 leading-snug">
+                <h3 className="font-medium text-[17px] text-gray-500 line-clamp-2 leading-snug min-h-[44px]">
                     {item?.title}
                 </h3>
 
