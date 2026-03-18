@@ -245,7 +245,7 @@ if (loading) {
                   <div className="flex flex-col items-center gap-4">
                     <div className="h-36 w-36 rounded-full border overflow-hidden">
                       <Image
-                        src={item.image[0]}
+                        src={item.images[0]}
                         alt={item.title}
                         width={144}
                         height={144}
