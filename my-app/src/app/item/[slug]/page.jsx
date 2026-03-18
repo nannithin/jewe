@@ -292,67 +292,66 @@ export default function Item({ params }) {
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-  {related.map((item) => (
-    <div
-      key={item._id}
-      onClick={() => router.push(`/item/${item.slug}`)}
-      className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
-    >
-      {/* Image */}
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-100">
-        <Image
-          src={item.images?.[0] || "/placeholder.png"}
-          alt={item?.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
-        />
+            {related.map((item) => (
+              <div
+                key={item._id}
+                onClick={() => router.push(`/item/${item.slug}`)}
+                className="group flex flex-col overflow-hidden  bg-white shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
+              >
+                {/* Image */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-100">
+                  <Image
+                    src={item.images?.[0] || "/placeholder.png"}
+                    alt={item?.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
 
-        {/* Discount badge */}
-        {item.originalPrice > item.price && (
-          <span className="absolute top-3 left-3 bg-green-500/90 text-white text-xs px-2.5 py-1 rounded-full shadow-sm">
-            {Math.round(
-              ((item.originalPrice - item.price) / item.originalPrice) * 100
-            )}
-            % OFF
-          </span>
-        )}
-      </div>
+                  {/* Discount badge */}
+                  {item.originalPrice > item.price && (
+                    <span className="absolute top-3 left-3 bg-green-500/90 text-white text-xs px-2.5 py-1 shadow-sm">
+                      {Math.round(
+                        ((item.originalPrice - item.price) / item.originalPrice) * 100
+                      )}
+                      % OFF
+                    </span>
+                  )}
+                </div>
 
-      {/* Content */}
-      <div className="flex flex-col justify-between p-4 gap-3 flex-1">
-        {/* Title */}
-        <h3 className="text-sm md:text-base font-medium text-neutral-800 line-clamp-2 leading-snug">
-          {item?.title}
-        </h3>
+                {/* Content */}
+                <div className="flex flex-col justify-between p-4 gap-3 flex-1">
+                  {/* Title */}
+                  <h3 className="text-sm md:text-base font-medium text-neutral-800 line-clamp-2 leading-snug">
+                    {item?.title}
+                  </h3>
 
-        {/* Price + Button */}
-        <div className="flex flex-col items-center justify-between">
-          <div className="flex flex-col">
-            <span className="text-base font-semibold text-[#B5947C]">
-              ₹{item.price}
-            </span>
+                  {/* Price + Button */}
+                  <div className="flex flex-col items-center justify-between">
+                    <div className="flex items-center gap-1">
+                      <span className="text-base font-semibold text-[#B5947C]">
+                        ₹{item.price}
+                      </span>
 
-            {item.originalPrice > item.price && (
-              <span className="text-xs text-gray-400 line-through">
-                ₹{item.originalPrice}
-              </span>
-            )}
+                      {item.originalPrice > item.price && (
+                        <span className="text-xs text-gray-400 line-through">
+                          ₹{item.originalPrice}
+                        </span>
+                      )}
+                    </div>
+
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      Buy
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <Button
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className="h-9 px-4 text-xs font-medium rounded-full bg-[#B5947C] text-white hover:bg-[#a07f68] transition"
-          >
-            Buy
-          </Button>
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
         </div>
       )}
     </div>
