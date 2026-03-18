@@ -7,9 +7,12 @@ import { ChevronRight, Heart, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { showToast } from "nextjs-toast-notify";
 import React, { useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 
 export default function Item({ params }) {
   const [showAdditional, setShowAdditional] = useState(false);
+  const [emblaRef, emblaApi] = useEmblaCarousel();
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [descr, setDescr] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(null)
@@ -19,6 +22,10 @@ export default function Item({ params }) {
   const { slug } = React.use(params);
 
   const [product, setProduct] = useState(null);
+  const scrollTo = (index) => {
+    if (emblaApi) emblaApi.scrollTo(index);
+    setSelectedIndex(index);
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -56,8 +63,39 @@ export default function Item({ params }) {
       </div>
 
       <div className="space-y-5">
-        <div className="w-full aspect-square bg-accent">
-          <Image src={product?.image} alt={product?.title} className="w-full aspect-square object-cover" />
+        <div className="space-y-4">
+
+          {/* 🔥 Main Carousel */}
+          <div className="overflow-hidden rounded-lg" ref={emblaRef}>
+            <div className="flex">
+              {product?.images.map((img, index) => (
+                <div key={index} className="min-w-full">
+                  <div className="w-full aspect-square bg-accent">
+                    <Image
+                      src={img}
+                      alt="product"
+                      width={500}
+                      height={500}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 🔥 Thumbnails */}
+          <div className="flex gap-2 overflow-x-auto">
+            {product?.images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                onClick={() => scrollTo(index)}
+                className={`w-16 h-16 object-cover rounded cursor-pointer border ${selectedIndex === index ? "border-black" : "border-gray-200"
+                  }`}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="space-y-3">
