@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import necklace from "../../public/necklace.jpg";
 import useStore from "@/store/useStore";
+import { Button } from "./ui/button";
 
 const ItemCard = ({ product : item }) => {
     const { wishlist, addToWishlist, removeFromWishlist } = useStore();
