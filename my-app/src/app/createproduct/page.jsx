@@ -26,12 +26,13 @@ export default function ProductForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
-  const [imageFile, setImageFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     price: '',
+    originalPrice: '',
     currency: 'inr',
     inStock: true,
     stockQuantity: '0',
@@ -95,18 +96,31 @@ export default function ProductForm() {
   };
 
   const handleImageChange = (e) => {
-    console.log(e);
+    const files = Array.from(e.target.files);
 
-    const file = e.target.files[0];
-    if (!file) return;
+    if (files.length === 0) return;
 
-    if (file.size > 2 * 1024 * 1024) {
-      setError("Image must be less than 2MB");
+    // limit (optional)
+    if (files.length > 5) {
+      setError("Max 5 images allowed");
       return;
     }
 
-    setImageFile(file);
-    setImagePreview(URL.createObjectURL(file));
+    // size check
+    for (const file of files) {
+      if (file.size > 2 * 1024 * 1024) {
+        setError("Each image must be less than 2MB");
+        return;
+      }
+    }
+
+    setImageFiles(files);
+
+    const previews = files.map((file) =>
+      URL.createObjectURL(file)
+    );
+
+    setImagePreviews(previews);
   };
 
   const handleSubmit = async (e) => {
@@ -116,25 +130,29 @@ export default function ProductForm() {
     setSuccess(false);
 
     try {
-      let imageUrl = '';
+      let imageUrls = [];
 
       // 🔥 1. Upload Image to Supabase First
-      if (imageFile) {
-        const filePath = `products/${Date.now()}-${imageFile.name}`;
+      if (imageFiles) {
+        if (imageFiles.length > 0) {
+          for (const file of imageFiles) {
+            const filePath = `products/${Date.now()}-${file.name}`;
 
-        const { error: uploadError } = await supabase.storage
-          .from('jewe')
-          .upload(filePath, imageFile);
+            const { error: uploadError } = await supabase.storage
+              .from('jewe')
+              .upload(filePath, file);
 
-        if (uploadError) {
-          throw new Error(uploadError.message);
+            if (uploadError) {
+              throw new Error(uploadError.message);
+            }
+
+            const { data } = supabase.storage
+              .from('jewe')
+              .getPublicUrl(filePath);
+
+            imageUrls.push(data.publicUrl);
+          }
         }
-
-        const { data } = supabase.storage
-          .from('jewe')
-          .getPublicUrl(filePath);
-
-        imageUrl = data.publicUrl;
       }
 
       // 🔥 2. Create Payload
@@ -144,14 +162,14 @@ export default function ProductForm() {
         originalPrice: parseFloat(formData.originalPrice),
         stockQuantity: parseInt(formData.stockQuantity),
         sizes: sizes,
-        image: [imageUrl], // 👈 add image URL here
+        image: [imageUrls], // 👈 add image URL here
       };
 
       const response = await api.post('/products', payload);
 
       setSuccess(true);
       console.log(response);
-      
+
       // Reset
       setFormData({
         title: '',
@@ -170,8 +188,8 @@ export default function ProductForm() {
       });
 
       setSizes([]);
-      setImageFile(null);
-      setImagePreview(null);
+      setImageFiles([]);
+      setImagePreviews([]);
 
       setTimeout(() => setSuccess(false), 3000);
 
@@ -237,16 +255,21 @@ export default function ProductForm() {
                     id="image"
                     type="file"
                     accept="image/*"
-                    onChange={(e) => handleImageChange(e)}
+                    multiple
                     required
+                    onChange={handleImageChange}
                     className="border-amber-200 focus:border-amber-500 cursor-pointer"
                   />
-                  {imagePreview && (
-                    <img
-                      src={imagePreview}
-                      alt="Preview"
-                      className="w-40 h-40 object-cover rounded-lg border"
-                    />
+                  {imagePreviews.length > 0 && (
+                    <div className="grid grid-cols-3 gap-3">
+                      {imagePreviews.map((src, index) => (
+                        <img
+                          key={index}
+                          src={src}
+                          className="w-full h-24 object-cover rounded-lg border"
+                        />
+                      ))}
+                    </div>
                   )}
                 </div>
                 <div className="space-y-2">
@@ -374,7 +397,7 @@ export default function ProductForm() {
                   />
                 </div>
 
-                
+
 
                 <div className="space-y-2">
                   <Label htmlFor="stockQuantity" className="text-amber-900 font-medium">
