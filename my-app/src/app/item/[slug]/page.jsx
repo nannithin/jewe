@@ -293,25 +293,40 @@ export default function Item({ params }) {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
             {related.map((item) => (
-              <div className="group flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-xl">
-                {/* Image Container */}
+              <div
+                onClick={() => router.push(`/item/${item.slug}`)}
+                className="group flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-xl cursor-pointer select-none"
+              >
+                {/* Image */}
                 <div className="relative h-64 w-full overflow-hidden bg-neutral-100">
                   <Image
-                    src={item.images?.[0]}
+                    src={item.images?.[0] || "/placeholder.png"}
                     alt={item?.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
+
+                  {/* 🔥 Discount badge */}
+                  {item.originalPrice > item.price && (
+                    <span className="absolute top-2 left-2 bg-green-100 text-green-700 text-xs px-2 py-1 rounded">
+                      {Math.round(
+                        ((item.originalPrice - item.price) /
+                          item.originalPrice) *
+                        100
+                      )}% OFF
+                    </span>
+                  )}
                 </div>
 
-                {/* Content Container */}
-                <div className="flex flex-col justify-between p-4">
+                {/* Content */}
+                <div className="flex flex-col justify-between p-4 flex-1">
                   {/* Title */}
                   <h3 className="mb-3 line-clamp-2 text-lg font-semibold text-neutral-900">
                     {item?.title}
                   </h3>
 
-                  {/* Price and Button */}
+                  {/* Price + Button */}
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
                       <span className="text-[#B5947C] font-semibold">
@@ -324,7 +339,13 @@ export default function Item({ params }) {
                         </span>
                       )}
                     </div>
+
                     <Button
+                      onClick={(e) => {
+                        e.stopPropagation(); // 🔥 important
+                        // add to cart logic
+                      }}
+                      className="bg-[#B5947C] text-white hover:opacity-90"
                     >
                       BUY NOW
                     </Button>
