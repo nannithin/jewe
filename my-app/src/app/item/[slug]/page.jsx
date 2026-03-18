@@ -327,7 +327,7 @@ export default function Item({ params }) {
                 {/* Content */}
                 <div className="flex flex-col justify-between gap-2 mt-2 flex-1">
                   {/* Title */}
-                  <h3 className="font-medium text-xl text-gray-500 line-clamp-2 leading-snug">
+                  <h3 className="font-medium text-[17px] text-gray-500 line-clamp-2 leading-snug">
                     {item?.title}
                   </h3>
 
@@ -347,7 +347,7 @@ export default function Item({ params }) {
 
                     <Button
                       
-                      className={"w-full text-[18px]"}
+                      className={"w-full text-[17px]"}
                     >
                       BUY NOW
                     </Button>
