@@ -293,35 +293,44 @@ export default function Item({ params }) {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
             {related.map((item) => (
-              <div
-                key={item._id}
-                onClick={() => router.push(`/item/${item.slug}`)}
-                className="cursor-pointer space-y-2"
-              >
-
-                <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                  <img
+              <div className="group flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-xl">
+                {/* Image Container */}
+                <div className="relative h-64 w-full overflow-hidden bg-neutral-100">
+                  <Image
                     src={item.images?.[0]}
-                    className="w-full h-full object-cover"
+                    alt={item?.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
-                <p className="text-sm font-medium">
-                  {item.title}
-                </p>
+                {/* Content Container */}
+                <div className="flex flex-col justify-between p-4">
+                  {/* Title */}
+                  <h3 className="mb-3 line-clamp-2 text-lg font-semibold text-neutral-900">
+                    {item?.title}
+                  </h3>
 
-                <div className="flex items-center gap-2">
-                  <span className="text-[#B5947C] font-semibold">
-                    ₹{item.price}
-                  </span>
+                  {/* Price and Button */}
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#B5947C] font-semibold">
+                        ₹{item.price}
+                      </span>
 
-                  {item.originalPrice > item.price && (
-                    <span className="text-xs line-through text-gray-400">
-                      ₹{item.originalPrice}
-                    </span>
-                  )}
+                      {item.originalPrice > item.price && (
+                        <span className="text-xs line-through text-gray-400">
+                          ₹{item.originalPrice}
+                        </span>
+                      )}
+                    </div>
+                    <Button
+                      onClick={onButtonClick}
+                    >
+                      BUY NOW
+                    </Button>
+                  </div>
                 </div>
-
               </div>
             ))}
           </div>
