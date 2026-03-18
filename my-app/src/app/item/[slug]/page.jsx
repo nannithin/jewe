@@ -105,7 +105,7 @@ export default function Item({ params }) {
                 key={index}
                 onClick={() => scrollTo(index)}
                 className={`h-2 w-2 rounded-full transition-all ${selectedIndex === index
-                    ? "bg-black w-4"
+                    ? "bg-[#B5947C]"
                     : "bg-gray-300"
                   }`}
               />
@@ -120,7 +120,7 @@ export default function Item({ params }) {
                 src={img}
                 onClick={() => scrollTo(index)}
                 className={`w-16 h-16 object-cover rounded cursor-pointer border transition ${selectedIndex === index
-                    ? "border-black"
+                    ? "border-[#B5947C]"
                     : "border-gray-200"
                   }`}
               />
