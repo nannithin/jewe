@@ -45,7 +45,7 @@ export default function Item({ params }) {
   useEffect(() => {
     const fetchProduct = async () => {
       const res = await fetch(
-        `https://jewe-2w4e.onrender.com/api/products/${slug}`
+        ` http://localhost:5000/api/products/${slug}`
       );
       const data = await res.json();
       setProduct(data);
@@ -58,7 +58,7 @@ export default function Item({ params }) {
 
     const fetchRelated = async () => {
       const res = await fetch(
-        `https://jewe-2w4e.onrender.com/api/products/related/${product._id}`
+        ` http://localhost:5000/api/products/related/${product._id}`
       );
 
       const data = await res.json();
@@ -296,7 +296,7 @@ export default function Item({ params }) {
               <div
                 key={item._id}
                 onClick={() => router.push(`/item/${item.slug}`)}
-                className="group flex flex-col overflow-hidden  bg-white shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
+                className="group flex flex-col overflow-hidden  bg-white transition-all duration-300 cursor-pointer"
               >
                 {/* Image */}
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-100">
@@ -310,7 +310,7 @@ export default function Item({ params }) {
 
                   {/* Discount badge */}
                   {item.originalPrice > item.price && (
-                    <span className="absolute top-3 left-3 bg-green-500/90 text-white text-xs px-2.5 py-1 shadow-sm">
+                    <span className="absolute top-0 left-0 bg-[#B5947C] text-white text-xs px-2.5 py-1 shadow-sm">
                       {Math.round(
                         ((item.originalPrice - item.price) / item.originalPrice) * 100
                       )}
@@ -320,21 +320,21 @@ export default function Item({ params }) {
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col justify-between p-4 gap-3 flex-1">
+                <div className="flex flex-col justify-between gap-2 mt-2 flex-1">
                   {/* Title */}
-                  <h3 className="text-sm md:text-base font-medium text-neutral-800 line-clamp-2 leading-snug">
+                  <h3 className="font-medium text-xl text-gray-500 line-clamp-2 leading-snug">
                     {item?.title}
                   </h3>
 
                   {/* Price + Button */}
-                  <div className="flex flex-col items-center justify-between">
-                    <div className="flex items-center gap-1">
+                  <div className="flex flex-col gap-2 justify-between">
+                    <div className="flex items-center gap-3">
                       <span className="text-base font-semibold text-[#B5947C]">
                         ₹{item.price}
                       </span>
 
                       {item.originalPrice > item.price && (
-                        <span className="text-xs text-gray-400 line-through">
+                        <span className="text-base font-medium text-gray-400 line-through">
                           ₹{item.originalPrice}
                         </span>
                       )}
@@ -344,8 +344,9 @@ export default function Item({ params }) {
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
+                      className={"w-full text-[18px]"}
                     >
-                      Buy
+                      BUY NOW
                     </Button>
                   </div>
                 </div>
