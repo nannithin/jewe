@@ -346,9 +346,7 @@ export default function Item({ params }) {
                     </div>
 
                     <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
+                      
                       className={"w-full text-[18px]"}
                     >
                       BUY NOW
