@@ -5,25 +5,20 @@ export const createProduct = async (req, res) => {
   try {
     const { title, price, originalPrice, ...rest } = req.body;
 
-    // 🔥 Basic validation
-    if (!price || !originalPrice) {
-      return res.status(400).json({
-        message: "Price and original price are required",
-      });
-    }
-
-    if (originalPrice < price) {
-      return res.status(400).json({
-        message: "Original price must be greater than or equal to price",
-      });
-    }
-
-    // 🔥 Slug
-    const slug = slugify(title, {
+    let baseSlug = slugify(title, {
       lower: true,
       strict: true,
       trim: true,
     });
+
+    let slug = baseSlug;
+    let count = 1;
+
+    // 🔥 Ensure unique slug
+    while (await Product.findOne({ slug })) {
+      slug = `${baseSlug}-${count}`;
+      count++;
+    }
 
     const product = await Product.create({
       title,
@@ -35,12 +30,10 @@ export const createProduct = async (req, res) => {
 
     res.status(201).json({
       message: "Product created successfully",
-      product, // includes discountPercentage (virtual)
+      product,
     });
 
   } catch (error) {
-    console.log(error);
-    
     res.status(500).json({ message: error.message });
   }
 };
