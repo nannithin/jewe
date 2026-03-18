@@ -22,6 +22,7 @@ export default function Item({ params }) {
   const { slug } = React.use(params);
 
   const [product, setProduct] = useState(null);
+  const [related, setRelated] = useState([]);
   useEffect(() => {
     if (!emblaApi) return;
 
@@ -52,6 +53,20 @@ export default function Item({ params }) {
 
     fetchProduct();
   }, []);
+  useEffect(() => {
+    if (!product?._id) return;
+
+    const fetchRelated = async () => {
+      const res = await fetch(
+        `https://jewe-2w4e.onrender.com/api/products/related/${product._id}`
+      );
+
+      const data = await res.json();
+      setRelated(data.products);
+    };
+
+    fetchRelated();
+  }, [product]);
 
   const isWishlisted = wishlist.some((item) => item._id === product?._id);
 
@@ -105,8 +120,8 @@ export default function Item({ params }) {
                 key={index}
                 onClick={() => scrollTo(index)}
                 className={`h-2 w-2 rounded-full transition-all ${selectedIndex === index
-                    ? "bg-[#B5947C] w-4"
-                    : "bg-gray-300"
+                  ? "bg-[#B5947C] w-4"
+                  : "bg-gray-300"
                   }`}
               />
             ))}
@@ -120,8 +135,8 @@ export default function Item({ params }) {
                 src={img}
                 onClick={() => scrollTo(index)}
                 className={`w-16 h-16 object-cover rounded cursor-pointer border transition ${selectedIndex === index
-                    ? "border-[#B5947C]"
-                    : "border-gray-200"
+                  ? "border-[#B5947C]"
+                  : "border-gray-200"
                   }`}
               />
             ))}
@@ -269,6 +284,50 @@ export default function Item({ params }) {
           )}
         </div>
       </div>
+      {related.length > 0 && (
+        <div className="pt-10 space-y-5">
+
+          <h2 className="text-lg font-semibold">
+            You may also like
+          </h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+            {related.map((item) => (
+              <div
+                key={item._id}
+                onClick={() => router.push(`/item/${item.slug}`)}
+                className="cursor-pointer space-y-2"
+              >
+
+                <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                  <img
+                    src={item.images?.[0]}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <p className="text-sm font-medium">
+                  {item.title}
+                </p>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-[#B5947C] font-semibold">
+                    ₹{item.price}
+                  </span>
+
+                  {item.originalPrice > item.price && (
+                    <span className="text-xs line-through text-gray-400">
+                      ₹{item.originalPrice}
+                    </span>
+                  )}
+                </div>
+
+              </div>
+            ))}
+          </div>
+
+        </div>
+      )}
     </div>
   );
 }
