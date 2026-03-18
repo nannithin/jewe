@@ -22,9 +22,23 @@ export default function Item({ params }) {
   const { slug } = React.use(params);
 
   const [product, setProduct] = useState(null);
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    };
+
+    emblaApi.on("select", onSelect);
+    onSelect(); // initial
+
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
+
   const scrollTo = (index) => {
-    if (emblaApi) emblaApi.scrollTo(index);
-    setSelectedIndex(index);
+    emblaApi && emblaApi.scrollTo(index);
   };
 
   useEffect(() => {
@@ -65,10 +79,10 @@ export default function Item({ params }) {
       <div className="space-y-5">
         <div className="space-y-4">
 
-          {/* 🔥 Main Carousel */}
+          {/* 🔥 Carousel */}
           <div className="overflow-hidden rounded-lg" ref={emblaRef}>
             <div className="flex">
-              {product?.images.map((img, index) => (
+              {images.map((img, index) => (
                 <div key={index} className="min-w-full">
                   <div className="w-full aspect-square bg-accent">
                     <Image
@@ -84,14 +98,30 @@ export default function Item({ params }) {
             </div>
           </div>
 
+          {/* 🔥 Dots Indicator */}
+          <div className="flex justify-center gap-2">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollTo(index)}
+                className={`h-2 w-2 rounded-full transition-all ${selectedIndex === index
+                    ? "bg-black w-4"
+                    : "bg-gray-300"
+                  }`}
+              />
+            ))}
+          </div>
+
           {/* 🔥 Thumbnails */}
           <div className="flex gap-2 overflow-x-auto">
-            {product?.images.map((img, index) => (
+            {images.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 onClick={() => scrollTo(index)}
-                className={`w-16 h-16 object-cover rounded cursor-pointer border ${selectedIndex === index ? "border-black" : "border-gray-200"
+                className={`w-16 h-16 object-cover rounded cursor-pointer border transition ${selectedIndex === index
+                    ? "border-black"
+                    : "border-gray-200"
                   }`}
               />
             ))}
