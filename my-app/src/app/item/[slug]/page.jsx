@@ -325,7 +325,6 @@ export default function Item({ params }) {
                       )}
                     </div>
                     <Button
-                      onClick={onButtonClick}
                     >
                       BUY NOW
                     </Button>
