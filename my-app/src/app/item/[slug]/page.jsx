@@ -105,7 +105,7 @@ export default function Item({ params }) {
                 key={index}
                 onClick={() => scrollTo(index)}
                 className={`h-2 w-2 rounded-full transition-all ${selectedIndex === index
-                    ? "bg-[#B5947C]"
+                    ? "bg-[#B5947C] w-4"
                     : "bg-gray-300"
                   }`}
               />
