@@ -53,7 +53,7 @@ const ItemCard = ({ product: item }) => {
             {/* Content */}
             <div className="flex flex-col gap-2 mt-2 flex-1">
                 {/* Title */}
-                <h3 className="font-medium text-[17px] text-gray-500 line-clamp-2 leading-snug min-h-[44px]">
+                <h3 className=" text-[17px] text-gray-500 line-clamp-2 leading-snug min-h-[44px]">
                     {item?.title}
                 </h3>
 
