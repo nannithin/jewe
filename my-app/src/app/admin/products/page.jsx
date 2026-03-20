@@ -232,7 +232,7 @@ export default function AdminDashboard() {
 
                                                     <div>
                                                         <p className="line-clamp-1 text-sm font-medium">
-                                                            {item.title}
+                                                            {product.title}
                                                         </p>
                                                         {product.description && (
                                                             <p className="line-clamp-1 text-xs text-muted-foreground">
