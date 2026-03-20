@@ -136,17 +136,7 @@ export default function AdminDashboard() {
                         </div>
                     </Card>
 
-                    <Card className="border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-colors hover:border-border">
-                        <div className="flex items-start justify-between">
-                            <div>
-                                <p className="text-sm text-muted-foreground">Inventory Value</p>
-                                <p className="mt-2 text-2xl font-bold">₹{totalValue.toFixed(2)}</p>
-                            </div>
-                            <div className="rounded-lg bg-accent/10 p-3">
-                                <Package className="h-5 w-5 text-accent" />
-                            </div>
-                        </div>
-                    </Card>
+                    
                 </div>
 
                 <Card className="mb-8 border-border/50 bg-card/50 p-6 backdrop-blur-sm">
