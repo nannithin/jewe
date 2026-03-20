@@ -106,6 +106,10 @@ export default function () {
                         <p>Admin Orders</p>
                         <ChevronRight />
                     </Link>
+                    <Link href={"/admin/products"} className="flex items-center justify-between py-3 border-b">
+                        <p>All products</p>
+                        <ChevronRight />
+                    </Link>
                 </>
             }
 
