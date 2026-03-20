@@ -85,7 +85,7 @@ export default function AdminDashboard() {
     const totalValue = products.reduce((sum, p) => sum + p.price, 0);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/10">
+        <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/10 pb-10">
             <div className="sticky top-0 z-10 border-b border-border/40 bg-background/80 backdrop-blur-sm">
                 <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
