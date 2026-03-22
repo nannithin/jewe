@@ -180,7 +180,7 @@ export default function Item({ params }) {
           </div>
 
           <div className="space-y-3">
-            <div className="flex justify-between items-center">
+            <div className="md:w-1/2 flex justify-between items-center">
               <p className="text-[17px]">Size</p>
               <p className="text-xs text-[#B5947C]">SIZE GUIDE</p>
             </div>
@@ -296,7 +296,7 @@ export default function Item({ params }) {
             You may also like
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
             {related.map((item) => (
               <div
                 key={item._id}
