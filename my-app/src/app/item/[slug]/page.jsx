@@ -139,9 +139,7 @@ export default function Item({ params }) {
                 key={index}
                 src={img}
                 onClick={() => scrollTo(index)}
-                className={`w-16 h-16 object-cover rounded cursor-pointer border transition ${selectedIndex === index
-                  ? "border-[#B5947C]"
-                  : "border-gray-200"
+                className={`h-16 w-16 shrink-0 rounded object-cover cursor-pointer border transition md:h-20 md:w-20 ${selectedIndex === index ? "border-[#B5947C]" : "border-gray-200"
                   }`}
               />
             ))}
