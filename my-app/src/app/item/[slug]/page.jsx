@@ -96,21 +96,21 @@ export default function Item({ params }) {
         <li>Shop</li>
       </div>
 
-      <div className="space-y-5">
-        <div className="space-y-4">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,620px)_1fr] lg:items-start">
+        <div className="space-y-4 lg:sticky lg:top-24">
 
           {/* 🔥 Carousel */}
-          <div className="overflow-hidden rounded-lg" ref={emblaRef}>
+          <div className="mx-auto w-full max-w-xl overflow-hidden rounded-xl lg:max-w-[620px]" ref={emblaRef}>
             <div className="flex">
               {product?.images.map((img, index) => (
                 <div key={index} className="min-w-full">
-                  <div className="w-full aspect-square bg-accent">
+                  <div className="aspect-square w-full overflow-hidden bg-accent">
                     <Image
                       src={img}
                       alt="product"
-                      width={500}
-                      height={500}
-                      className="w-full h-full object-cover"
+                      width={800}
+                      height={800}
+                      className="h-full w-full object-cover"
                     />
                   </div>
                 </div>
@@ -346,7 +346,7 @@ export default function Item({ params }) {
                     </div>
 
                     <Button
-                      
+
                       className={"w-full text-[17px]"}
                     >
                       BUY NOW
